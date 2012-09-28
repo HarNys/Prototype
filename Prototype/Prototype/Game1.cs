@@ -121,7 +121,6 @@ namespace Prototype
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             
-            
             // TODO: Add your drawing code here
 
             // Start drawing
