@@ -20,7 +20,7 @@ namespace Prototype
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         
-        Sprits img1;  //Iimage for cards
+        Cards img1;  //Iimage for cards
 
         public Game1()
         {
@@ -37,8 +37,8 @@ namespace Prototype
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-           
-            img1 =  new Sprits();  //creats the cards
+
+            img1 = new Cards();  //creats the cards
 
 
             base.Initialize();
@@ -55,8 +55,8 @@ namespace Prototype
 
             // TODO: use this.Content to load your game content here
             // Load the sprit resources 
-            Vector2 playerPosition = new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y + GraphicsDevice.Viewport.TitleSafeArea.Height / 2);
-            img1.Initialize(Content.Load<Texture2D>("card1.gif"), playerPosition);
+            Vector2 imgPosition = new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y + GraphicsDevice.Viewport.TitleSafeArea.Height / 2);
+            img1.Initialize(Content.Load<Texture2D>("card1"), imgPosition);
 
         }
 

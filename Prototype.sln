@@ -3,12 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype", "Prototype\Prototype\Prototype.csproj", "{7DDA629B-C0AC-4A25-9480-72FA6F48522B}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "PrototypeContent", "Prototype\PrototypeContent\PrototypeContent.contentproj", "{DAAE7143-70BF-4963-A7DB-626E37F201C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrototypeContent", "Prototype\PrototypeContent\PrototypeContent.contentproj", "{DAAE7143-70BF-4963-A7DB-626E37F201C5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34DE46CA-2394-424B-80AE-F340C159EB87}"
-	ProjectSection(SolutionItems) = preProject
-		Prototype\Prototype\sprites.cs = Prototype\Prototype\sprites.cs
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

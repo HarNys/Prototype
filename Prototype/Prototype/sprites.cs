@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-class Sprits
+class Cards
 {
     // Animation representing the player
     public Texture2D imgTexture;
