@@ -82,7 +82,7 @@ namespace Prototype
             {
                 int imagePos = (i * 10 + 10);
                 Vector2 imgPosition = new Vector2(imagePos, 10);
-                card[i].Initialize(Content.Load<Texture2D>("card1"), imgPosition);
+                card[i].Initialize(Content.Load<Texture2D>("cardSprits/blank"), imgPosition);
             }
 
         }
@@ -127,7 +127,7 @@ namespace Prototype
             // Start drawing
             spriteBatch.Begin();
 
-            // Draw the Player
+            // Draw the cards
 
             for (int i = 0; i < 10; i++)
             {
