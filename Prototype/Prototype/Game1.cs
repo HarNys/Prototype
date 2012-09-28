@@ -34,6 +34,8 @@ namespace Prototype
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            Sprits img1 =  new Sprits();
+
 
             base.Initialize();
         }
@@ -84,6 +86,10 @@ namespace Prototype
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+
+
+
 
             base.Draw(gameTime);
         }
