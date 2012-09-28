@@ -20,7 +20,7 @@ namespace Prototype
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         
-        Cards img1;  //Iimage for cards
+        Cards[] card;  //Iimage for cards
 
         public Game1()
         {
@@ -38,8 +38,12 @@ namespace Prototype
         {
             // TODO: Add your initialization logic here
 
-            img1 = new Cards();  //creats the cards
 
+                card = new Cards[10];  //creats the cards
+                for (int i = 0; i < 10; i++)
+                {
+                    card[i] = new Cards();
+                }
 
             base.Initialize();
         }
@@ -54,9 +58,13 @@ namespace Prototype
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            // Load the sprit resources 
-            Vector2 imgPosition = new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y + GraphicsDevice.Viewport.TitleSafeArea.Height / 2);
-            img1.Initialize(Content.Load<Texture2D>("card1"), imgPosition);
+            // ;Load the sprit resources
+            for (int i = 0; i < 10; i++)
+            {
+                int imagePos = (i * 10 + 10);
+                Vector2 imgPosition = new Vector2(imagePos, 10);
+                card[i].Initialize(Content.Load<Texture2D>("card1"), imgPosition);
+            }
 
         }
 
@@ -101,7 +109,11 @@ namespace Prototype
             spriteBatch.Begin();
 
             // Draw the Player
-            img1.Draw(spriteBatch);
+
+            for (int i = 0; i < 10; i++)
+            {
+                card[i].Draw(spriteBatch);
+            }
 
             // Stop drawing
             spriteBatch.End();
