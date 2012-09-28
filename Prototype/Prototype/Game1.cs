@@ -15,6 +15,25 @@ namespace Prototype
     /// <summary>
     /// This is the main type for your game
     /// </summary>
+
+    public class Card
+    {
+        int imageIndex;
+        bool hidden;
+        
+        public Card()
+        {
+            imageIndex = 0;
+            hidden = true;
+        }
+
+        public Card(int imageNumber)
+        {
+            imageIndex = imageNumber;
+            hidden = true;
+        }
+    }
+
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
