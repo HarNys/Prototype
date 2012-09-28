@@ -20,6 +20,7 @@ namespace Prototype
     {
         int imageIndex;
         bool hidden;
+       
         
         public Card()
         {
@@ -38,13 +39,17 @@ namespace Prototype
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+        int numCards = 6;
         Cards[] card;  //Iimage for cards
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+           
+            /*Rezising the window*/
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 400;
         }
 
         /// <summary>
@@ -55,11 +60,13 @@ namespace Prototype
         /// </summary>
         protected override void Initialize()
         {
+
+
             // TODO: Add your initialization logic here
 
 
-                card = new Cards[10];  //creats the cards
-                for (int i = 0; i < 10; i++)
+            card = new Cards[numCards];  //creats the cards
+            for (int i = 0; i < numCards; i++)
                 {
                     card[i] = new Cards();
                 }
@@ -78,11 +85,24 @@ namespace Prototype
 
             // TODO: use this.Content to load your game content here
             // ;Load the sprit resources
-            for (int i = 0; i < 10; i++)
+                int imageXPos = 0;
+                int imageYPos = 0;
+            
+            for (int i = 0; i < numCards; i++)
             {
-                int imagePos = (i * 10 + 10);
-                Vector2 imgPosition = new Vector2(imagePos, 10);
-                card[i].Initialize(Content.Load<Texture2D>("cardSprits/blank"), imgPosition);
+                if (i%2 != 0)
+                {
+                    imageXPos = 0;
+                    imageYPos = ((i/2)*250) ;
+                }
+                else
+                {
+                    imageXPos = 300;
+                    imageYPos = ((i / 2) * 250);
+                }
+
+                Vector2 imgPosition = new Vector2(imageXPos, imageYPos);
+                card[i].Initialize(Content.Load<Texture2D>("hitBox"), imgPosition);
             }
 
         }
@@ -129,7 +149,7 @@ namespace Prototype
 
             // Draw the cards
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < numCards; i++)
             {
                 card[i].Draw(spriteBatch);
             }
