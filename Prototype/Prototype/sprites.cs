@@ -1,26 +1,50 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-public class Sprits
+class Sprits
 {
-    private Texture2D SpriteTexture;
-    private Rectangle TitleSafe;
+    // Animation representing the player
+    public Texture2D imgTexture;
 
-    public Sprits()
-	{
-        spriteBatch = new SpriteBatch(GraphicsDevice);
-        SpriteTextre = Content.Load<Texture2D>("ship");
-        TitleSafe = uGetTitleSafeArea(.8f);
-	}
+    // Position of the Player relative to the upper left side of the screen
+    public Vector2 Position;
 
-    protected override void Draw(GameTime gameTime)
+    // State of the player
+    public bool Active;
+
+    // Amount of hit points that player has
+    public int Health;
+
+    // Get the width of the player ship
+    public int Width
     {
-        graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-        
-        spriteBatch.Begin();
-        Vector2 pos = new Vector2(TitleSafe.Left, TitleSafe.Top);
-        spriteBatch.Draw(SpriteTexture, pos, Color.White);
-        spriteBatch.End();
+        get { return imgTexture.Width; }
+    }
 
-        base.Draw(gameTime);
+    // Get the height of the player ship
+    public int Height
+    {
+        get { return imgTexture.Height; }
+    }
+
+
+    public void Initialize(Texture2D texture, Vector2 position)
+    {
+        imgTexture = texture;
+
+        Position = position;
+
+        Active = true;
+    }
+
+    public void Update()
+    {
+        
+    }
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(imgTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Prototype
 {
+     
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -18,6 +19,8 @@ namespace Prototype
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
+        Sprits img1;  //Iimage for cards
 
         public Game1()
         {
@@ -34,7 +37,8 @@ namespace Prototype
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Sprits img1 =  new Sprits();
+           
+            img1 =  new Sprits();  //creats the cards
 
 
             base.Initialize();
@@ -50,6 +54,10 @@ namespace Prototype
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            // Load the sprit resources 
+            Vector2 playerPosition = new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y + GraphicsDevice.Viewport.TitleSafeArea.Height / 2);
+            img1.Initialize(Content.Load<Texture2D>("card1.gif"), playerPosition);
+
         }
 
         /// <summary>
@@ -85,11 +93,18 @@ namespace Prototype
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            
+            
             // TODO: Add your drawing code here
 
+            // Start drawing
+            spriteBatch.Begin();
 
+            // Draw the Player
+            img1.Draw(spriteBatch);
 
-
+            // Stop drawing
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
