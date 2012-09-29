@@ -139,7 +139,7 @@ namespace Prototype
             this.depthStream.Size = new Vector2(this.viewPortRectangle.Width / 4, this.viewPortRectangle.Height / 4);
             this.depthStream.Position = new Vector2(Width - this.depthStream.Size.X - 15, 85);
 
-            this.skeletonStream = new SkeletonStreamRenderer(this, this.depthStream.SkeletonToDepthMap);
+           // this.skeletonStream = new SkeletonStreamRenderer(this, this.depthStream.SkeletonToDepthMap);
 
             // Store the values so we can animate them later
             this.minSize = this.depthStream.Size;
@@ -242,10 +242,10 @@ namespace Prototype
 
             // TODO: Add your update logic here
 
-            LHandPos = this.skeletonStream.jointPosLHand;
-            RHandPos = this.skeletonStream.jointPosRHand;
-            LFootPos = this.skeletonStream.jointPosLFoot;
-            RFootPos = this.skeletonStream.jointPosRFoot;
+            LHandPos = this.depthStream.skeletonStream.jointPosLHand;
+            RHandPos = this.depthStream.skeletonStream.jointPosRHand;
+            LFootPos = this.depthStream.skeletonStream.jointPosLFoot;
+            RFootPos = this.depthStream.skeletonStream.jointPosRFoot;
 
             Console.WriteLine(LHandPos);
 

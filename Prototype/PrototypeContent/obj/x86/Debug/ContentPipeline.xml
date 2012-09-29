@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBox.xnb</Output>
-      <Time>2012-09-29T14:48:59.9936731+02:00</Time>
+      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBox.xnb</Output>
+      <Time>2012-09-29T11:21:21.9604329+02:00</Time>
     </Item>
     <Item>
       <Source>Bone.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Bone.xnb</Output>
-      <Time>2012-09-29T14:48:59.9656715+02:00</Time>
+      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Bone.xnb</Output>
+      <Time>2012-07-29T18:23:28+02:00</Time>
     </Item>
     <Item>
       <Source>ChooserBackground.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\ChooserBackground.xnb</Output>
-      <Time>2012-09-29T14:48:59.9676716+02:00</Time>
+      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\ChooserBackground.xnb</Output>
+      <Time>2012-07-29T18:23:28+02:00</Time>
     </Item>
     <Item>
       <Source>Header.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Header.xnb</Output>
-      <Time>2012-09-29T14:48:59.9696717+02:00</Time>
+      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Header.xnb</Output>
+      <Time>2012-07-29T18:23:28+02:00</Time>
     </Item>
     <Item>
       <Source>Joint.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Joint.xnb</Output>
-      <Time>2012-09-29T14:48:59.9716718+02:00</Time>
+      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Joint.xnb</Output>
+      <Time>2012-07-29T18:23:28+02:00</Time>
     </Item>
     <Item>
       <Source>KinectColorVisualizer.fx</Source>
@@ -52,8 +52,8 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectColorVisualizer.xnb</Output>
-      <Time>2012-09-29T14:48:59.9726719+02:00</Time>
+      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectColorVisualizer.xnb</Output>
+      <Time>2012-07-29T18:23:28+02:00</Time>
     </Item>
     <Item>
       <Source>KinectDepthVisualizer.fx</Source>
@@ -61,8 +61,8 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectDepthVisualizer.xnb</Output>
-      <Time>2012-09-29T14:48:59.9736719+02:00</Time>
+      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectDepthVisualizer.xnb</Output>
+      <Time>2012-07-29T18:23:28+02:00</Time>
     </Item>
     <Item>
       <Source>Segoe16.spritefont</Source>
@@ -70,8 +70,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Segoe16.xnb</Output>
-      <Time>2012-09-29T14:48:59.9896728+02:00</Time>
+      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Segoe16.xnb</Output>
+      <Time>2012-07-29T18:23:28+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -79,10 +79,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\PrototypeContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\PrototypeContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\skole\Prototype\Prototype\PrototypeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\skole\Prototype\Prototype\Prototype\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\skole\Prototype\Prototype\PrototypeContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -110,16 +110,16 @@
         <Value>2010-08-23T12:41:18+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\PrototypeContent\Microsoft.Samples.Kinect.SwipeGestureRecognizer.dll</Key>
-        <Value>2012-09-29T14:48:59.9826724+02:00</Value>
+        <Key>C:\skole\Prototype\Prototype\PrototypeContent\Microsoft.Samples.Kinect.SwipeGestureRecognizer.dll</Key>
+        <Value>2012-09-29T11:21:21.9434319+02:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\Microsoft.Kinect\v4.0_1.5.0.0__31bf3856ad364e35\Microsoft.Kinect.dll</Key>
-        <Value>2012-09-10T14:09:45.0576654+02:00</Value>
+        <Value>2012-09-28T19:10:36.8411917+02:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-09-29T00:41:50.7186837+02:00</Value>
+        <Value>2012-09-28T18:20:32.2983417+02:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

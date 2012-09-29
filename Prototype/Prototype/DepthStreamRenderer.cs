@@ -18,7 +18,7 @@ namespace Prototype
         /// <summary>
         /// The child responsible for rendering the depth stream's skeleton.
         /// </summary>
-        private readonly SkeletonStreamRenderer skeletonStream;
+        public readonly SkeletonStreamRenderer skeletonStream;
 
         /// <summary>
         /// The back buffer where the depth frame is scaled as requested by the Size.
