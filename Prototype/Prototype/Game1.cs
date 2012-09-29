@@ -243,26 +243,6 @@ namespace Prototype
                 }
             }
 
-            // Animate the stream positions and sizes
-            this.colorStream.Position = Vector2.SmoothStep(
-                new Vector2(this.viewPortRectangle.X, this.viewPortRectangle.Y),
-                this.colorSmallPosition,
-                (float)(this.transition / TransitionDuration));
-            this.colorStream.Size = Vector2.SmoothStep(
-                new Vector2(this.viewPortRectangle.Width, this.viewPortRectangle.Height),
-                this.minSize,
-                (float)(this.transition / TransitionDuration));
-
-            this.depthStream.Position = Vector2.SmoothStep(
-                this.depthSmallPosition,
-                new Vector2(this.viewPortRectangle.X, this.viewPortRectangle.Y),
-                (float)(this.transition / TransitionDuration));
-            this.depthStream.Size = Vector2.SmoothStep(
-                this.minSize,
-                new Vector2(this.viewPortRectangle.Width, this.viewPortRectangle.Height),
-                (float)(this.transition / TransitionDuration));
-
-
             base.Update(gameTime);
         }
 
@@ -274,8 +254,7 @@ namespace Prototype
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
-            
+            //GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
             
             // TODO: Add your drawing code here
 
@@ -288,6 +267,8 @@ namespace Prototype
             {
                 card.Draw(spriteBatch);
             }
+
+
 
             // Stop drawing
             spriteBatch.End();
