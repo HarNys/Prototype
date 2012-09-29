@@ -7,3 +7,4 @@ Content\KinectColorVisualizer.xnb
 Content\KinectDepthVisualizer.xnb
 Content\Segoe16.xnb
 Content\lydting.xnb
+Content\SpriteFont1.xnb

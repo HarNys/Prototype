@@ -82,6 +82,15 @@
       <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\lydting.xnb</Output>
       <Time>2012-09-29T22:24:27.0583314+02:00</Time>
     </Item>
+    <Item>
+      <Source>SpriteFont1.spritefont</Source>
+      <Name>SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
+      <Time>2012-09-30T00:49:09.7179512+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

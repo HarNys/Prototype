@@ -29,11 +29,13 @@ namespace Prototype
 
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        int Score;
+        int score;
         int lvl;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+
         bool newLevel;
         bool playing;
         int hits;
@@ -47,6 +49,7 @@ namespace Prototype
         Vector2 RFootPos;
 
         Cards card;  //Iimage for cards
+        SpriteFont scoreFont;
 
         int[] beatSequence;
 
@@ -185,17 +188,17 @@ namespace Prototype
 
            // newLevel = true; //games starts at new level
 
-            Score = 0;
+            score = 0;
 
             base.Initialize();
         }
-
         
         //Random generator for the placing of boxes
         protected void RandomSequence(int beats)
         {
 
-           beatSequence = new int[beats];
+            
+            beatSequence = new int[beats];
             for (int i = 0; i < beats; i++)
             {
                 beatSequence[i] = random.Next(6);
@@ -221,7 +224,7 @@ namespace Prototype
 
                 Vector2 imgPosition = new Vector2(imageXPos, imageYPos);
                 card.Initialize(Content.Load<Texture2D>("hitBox"), imgPosition);
-
+                scoreFont = Content.Load<SpriteFont>("SpriteFont1");
                 soundEffect = Content.Load<SoundEffect>("lydting");
             
 
@@ -260,8 +263,8 @@ namespace Prototype
 
             if (playing)
             {
-                // Console.WriteLine("Hit: " + hits);
-                Console.WriteLine("Score: " + Score);
+                 Console.WriteLine("Hit: " + hits);
+                Console.WriteLine("score: " + score);
                 Console.WriteLine("Left hand: " + LHandPos + " Rigth Hand: " + RHandPos);
                // Console.WriteLine("Rigth Hand: " + RHandPos);
             }
@@ -290,65 +293,61 @@ namespace Prototype
                     card.Update(beatSequence[gameTime.TotalGameTime.Seconds]);
                 }
                 
-                else
-                {
-                    card.Show = false;
-                }
+               // else
+              //  {
+               //     card.Show = false;
+                //}
 
-
-
-                if (!card.Show && playing)
+                if (card.Show && playing)
                 {
 
 
                     imageXPos = 0;
                     imageYPos = ((beatSequence[hits] / 2) * 250);
 
-                    //card.Update(beatSequence[hits]);
+                    card.Update(beatSequence[hits]);
 
                     if (beatSequence[hits] % 2 == 0)
                     {
                         imageXPos = 0;
-                        imageYPos = ((beatSequence[hits] / 2) * 250);
+                        imageYPos = ((beatSequence[hits] / 2) * 200);
 
                         //Console.WriteLine("Left: Top: " + imageXPos +"," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos+100));
 
-                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 100) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || 
-                            RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 100) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || 
-                            LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 100) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || 
-                            RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 100) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
+                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 150) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || 
+                            RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 150) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || 
+                            LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 150) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || 
+                            RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 150) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
                         {
                             soundEffect.Play();
-                            Score++;
+                            score++;
                             hits++;
                         }
-
-
                     }
                     else
                     {
-                        
 
                         imageXPos = 500; //Kinect sucks balls, thats why
-                        imageYPos = ((beatSequence[hits] / 2) * 250);
+                        imageYPos = ((beatSequence[hits] / 2) * 200);
 
                        // Console.WriteLine("Right: Top: " + imageXPos + "," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos + 100));
 
-                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 100) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || 
-                            RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 100) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || 
-                            LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 100) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || 
-                            RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 100) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
+                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 150) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || 
+                            RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 150) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || 
+                            LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 150) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || 
+                            RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 150) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
                         {
                             soundEffect.Play();
-                            Score++;
+                            score++;
                             hits++;
                         }
                     }
                 }
 
-                if (hits == beatSequence.Length)
+                if (beatSequence.Length == hits)
                 {
                     playing = false;
+                    hits = 0;
                 }
             
             }
@@ -421,6 +420,7 @@ namespace Prototype
 
             // Draw the cards
             card.Draw(spriteBatch);
+            spriteBatch.DrawString(scoreFont, "score: " + score, new  Vector2 (150,10), Microsoft.Xna.Framework.Color.HotPink);
 
             // Stop drawing
             spriteBatch.End();

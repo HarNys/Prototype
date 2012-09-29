@@ -14,3 +14,4 @@ C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectColorVisualiz
 C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectDepthVisualizer.xnb
 C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Segoe16.xnb
 C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\lydting.xnb
+C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\SpriteFont1.xnb
