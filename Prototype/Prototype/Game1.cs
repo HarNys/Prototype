@@ -143,8 +143,10 @@ namespace Prototype
 
             int[] tempRandomArray = { 1, 2, 3, 4, 5, 0, 3 };
 
-
-            card.Update(tempRandomArray[0]);
+            if (gameTime.TotalGameTime.Seconds < tempRandomArray.Length)
+            {
+                card.Update(tempRandomArray[gameTime.TotalGameTime.Seconds]);
+            }
 
             base.Update(gameTime);
         }
