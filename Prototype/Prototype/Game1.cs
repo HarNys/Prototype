@@ -27,27 +27,10 @@ namespace Prototype
     /// This is the main type for your game
     /// </summary>
 
-    public class Card
-    {
-        int imageIndex;
-        bool hidden;
-       
-        
-        public Card()
-        {
-            imageIndex = 0;
-            hidden = true;
-        }
-
-        public Card(int imageNumber)
-        {
-            imageIndex = imageNumber;
-            hidden = true;
-        }
-    }
-
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         int numCards = 6;
@@ -59,14 +42,98 @@ namespace Prototype
         Random random = new Random();
 
 
+        /// <summary>
+        /// This controls the transition time for the resize animation.
+        /// </summary>
+        private const double TransitionDuration = 1.0;
+
+        /// <summary>
+        /// This control selects a sensor, and displays a notice if one is
+        /// not connected.
+        /// </summary>
+        private readonly KinectChooser chooser;
+
+        /// <summary>
+        /// This manages the rendering of the color stream.
+        /// </summary>
+        private readonly ColorStreamRenderer colorStream;
+
+        /// <summary>
+        /// This manages the rendering of the depth stream.
+        /// </summary>
+        private readonly DepthStreamRenderer depthStream;
+
+        /// <summary>
+        /// This is the location of the color stream when minimized.
+        /// </summary>
+        private readonly Vector2 colorSmallPosition;
+
+        /// <summary>
+        /// This is the location of the depth stream when minimized;
+        /// </summary>
+        private readonly Vector2 depthSmallPosition;
+
+        /// <summary>
+        /// This is the minimized size for both streams.
+        /// </summary>
+        private readonly Vector2 minSize;
+
+        /// <summary>
+        /// This is the viewport of the streams.
+        /// </summary>
+        private readonly Microsoft.Xna.Framework.Rectangle viewPortRectangle;
+
+        /// <summary>
+        /// This tracks the state to indicate which stream has focus.
+        /// </summary>
+        private bool colorHasFocus = true;
+
+        /// <summary>
+        /// This tracks the previous keyboard state.
+        /// </summary>
+        private KeyboardState previousKeyboard;
+
+        /// <summary>
+        /// This tracks the current transition time.
+        /// 0                   = Color Stream Full Focus
+        /// TransitionDuration  = Depth Stream Full Focus
+        /// </summary>
+        private double transition;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
            
             /*Rezising the window*/
-            graphics.PreferredBackBufferHeight = 600;
-            graphics.PreferredBackBufferWidth = 400;
+            int Width = 400;
+            int Hight = 600;
+            graphics.PreferredBackBufferHeight = Hight;
+            graphics.PreferredBackBufferWidth = Width;
+
+            // The Kinect sensor will use 640x480 for both streams
+            // To make your app handle multiple Kinects and other scenarios,
+            // it is recommended to use KinectSensorChooser provided in Microsoft.Kinect.Toolkit
+            this.chooser = new KinectChooser(this, ColorImageFormat.RgbResolution640x480Fps30, DepthImageFormat.Resolution640x480Fps30);
+            this.Services.AddService(typeof(KinectChooser), this.chooser);
+
+            // Default size is the full viewport
+            this.colorStream = new ColorStreamRenderer(this);
+
+            // Calculate the minimized size and location
+            this.depthStream = new DepthStreamRenderer(this);
+            this.depthStream.Size = new Vector2(this.viewPortRectangle.Width / 4, this.viewPortRectangle.Height / 4);
+            this.depthStream.Position = new Vector2(Width - this.depthStream.Size.X - 15, 85);
+
+            // Store the values so we can animate them later
+            this.minSize = this.depthStream.Size;
+            this.depthSmallPosition = this.depthStream.Position;
+            this.colorSmallPosition = new Vector2(15, 85);
+
+            this.Components.Add(this.chooser);
+
+            this.previousKeyboard = Keyboard.GetState();
+
         }
 
         /// <summary>
@@ -77,10 +144,10 @@ namespace Prototype
         /// </summary>
         protected override void Initialize()
         {
-
-
+           
             // TODO: Add your initialization logic here
-
+            this.Components.Add(this.depthStream);
+            this.Components.Add(this.colorStream);
 
             card = new Cards();  //creats the cards
 
@@ -110,8 +177,9 @@ namespace Prototype
             // ;Load the sprit resources
                 int imageXPos = 0;
                 int imageYPos = 0;
-            
 
+                this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+                this.Services.AddService(typeof(SpriteBatch), this.spriteBatch);
 
                 Vector2 imgPosition = new Vector2(imageXPos, imageYPos);
                 card.Initialize(Content.Load<Texture2D>("hitBox"), imgPosition);
@@ -128,6 +196,8 @@ namespace Prototype
             // TODO: Unload any non ContentManager content here
         }
 
+      
+        
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -154,8 +224,49 @@ namespace Prototype
                 card.Show = false;
             }
 
+
+            // Animate the transition value
+            if (this.colorHasFocus)
+            {
+                this.transition -= gameTime.ElapsedGameTime.TotalSeconds;
+                if (this.transition < 0)
+                {
+                    this.transition = 0;
+                }
+            }
+            else
+            {
+                this.transition += gameTime.ElapsedGameTime.TotalSeconds;
+                if (this.transition > TransitionDuration)
+                {
+                    this.transition = TransitionDuration;
+                }
+            }
+
+            // Animate the stream positions and sizes
+            this.colorStream.Position = Vector2.SmoothStep(
+                new Vector2(this.viewPortRectangle.X, this.viewPortRectangle.Y),
+                this.colorSmallPosition,
+                (float)(this.transition / TransitionDuration));
+            this.colorStream.Size = Vector2.SmoothStep(
+                new Vector2(this.viewPortRectangle.Width, this.viewPortRectangle.Height),
+                this.minSize,
+                (float)(this.transition / TransitionDuration));
+
+            this.depthStream.Position = Vector2.SmoothStep(
+                this.depthSmallPosition,
+                new Vector2(this.viewPortRectangle.X, this.viewPortRectangle.Y),
+                (float)(this.transition / TransitionDuration));
+            this.depthStream.Size = Vector2.SmoothStep(
+                this.minSize,
+                new Vector2(this.viewPortRectangle.Width, this.viewPortRectangle.Height),
+                (float)(this.transition / TransitionDuration));
+
+
             base.Update(gameTime);
         }
+
+
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -181,7 +292,33 @@ namespace Prototype
             // Stop drawing
             spriteBatch.End();
 
+            // Render the streams with respect to focus
+            if (this.colorHasFocus)
+            {
+                this.colorStream.DrawOrder = 1;
+                this.depthStream.DrawOrder = 2;
+            }
+            else
+            {
+                this.colorStream.DrawOrder = 2;
+                this.depthStream.DrawOrder = 1;
+            }
+
+
             base.Draw(gameTime);
+        }
+
+        /// <summary>
+        /// This method ensures that we can render to the back buffer without
+        /// losing the data we already had in our previous back buffer.  This
+        /// is necessary for the SkeletonStreamRenderer.
+        /// </summary>
+        /// <param name="sender">The sending object.</param>
+        /// <param name="e">The event args.</param>
+        private void GraphicsDevicePreparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
+        {
+            // This is necessary because we are rendering to back buffer/render targets and we need to preserve the data
+            e.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
         }
     }
 }
