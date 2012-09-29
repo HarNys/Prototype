@@ -30,6 +30,7 @@ namespace Prototype
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         int Score;
+        int lvl;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -47,7 +48,7 @@ namespace Prototype
 
         Cards card;  //Iimage for cards
 
-        int[] beatSequence = {0,1,2,3,4,5};
+        int[] beatSequence;
 
         Random random = new Random();
 
@@ -166,6 +167,7 @@ namespace Prototype
 
             // TODO: Add your initialization logic here
             hits = 0;
+            lvl = 0;
             
             this.Components.Add(this.depthStream);
             this.Components.Add(this.colorStream);
@@ -174,7 +176,7 @@ namespace Prototype
             card = new Cards();  //creats the hitboxes
 
 
-
+            card.Show = true;
             playing = false;
          /*   do
             {
@@ -193,11 +195,11 @@ namespace Prototype
         protected void RandomSequence(int beats)
         {
 
-           /* beatSequence = new int[beats];
+           beatSequence = new int[beats];
             for (int i = 0; i < beats; i++)
             {
- ///////////////////////////////////////////////////////////               beatSequence[i] = random.Next(6);
-            }*/
+                beatSequence[i] = random.Next(6);
+            }
         }
 
         /// <summary>
@@ -260,8 +262,8 @@ namespace Prototype
             {
                 // Console.WriteLine("Hit: " + hits);
                 Console.WriteLine("Score: " + Score);
-                Console.WriteLine("Left hand: " + LHandPos);
-                Console.WriteLine("Rigth Hand: " + RHandPos);
+                Console.WriteLine("Left hand: " + LHandPos + " Rigth Hand: " + RHandPos);
+               // Console.WriteLine("Rigth Hand: " + RHandPos);
             }
 
            /* if (LHandPos.X < 100 && LHandPos.Y < 100 || RHandPos.X < 100 && RHandPos.Y < 100)
@@ -276,7 +278,7 @@ namespace Prototype
 
             if (!playing)
             {
-              //  RandomSequence(6);
+                RandomSequence(5+lvl);
 
                 playing = true;
             }
@@ -293,19 +295,28 @@ namespace Prototype
                     card.Show = false;
                 }
 
-                imageXPos = 0;
-                imageYPos = ((beatSequence[hits] / 2) * 250);
 
-                if (!card.Show)
+
+                if (!card.Show && playing)
                 {
+
+
+                    imageXPos = 0;
+                    imageYPos = ((beatSequence[hits] / 2) * 250);
+
+                    //card.Update(beatSequence[hits]);
+
                     if (beatSequence[hits] % 2 == 0)
                     {
                         imageXPos = 0;
                         imageYPos = ((beatSequence[hits] / 2) * 250);
 
-                        Console.WriteLine("Left: Top: " + imageXPos +"," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos+100));
+                        //Console.WriteLine("Left: Top: " + imageXPos +"," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos+100));
 
-                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 100) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 100) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 100) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 100) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
+                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 100) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || 
+                            RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 100) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || 
+                            LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 100) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || 
+                            RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 100) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
                         {
                             soundEffect.Play();
                             Score++;
@@ -318,12 +329,15 @@ namespace Prototype
                     {
                         
 
-                        imageXPos = 300;
+                        imageXPos = 500; //Kinect sucks balls, thats why
                         imageYPos = ((beatSequence[hits] / 2) * 250);
 
-                        Console.WriteLine("Right: Top: " + imageXPos + "," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos + 100));
+                       // Console.WriteLine("Right: Top: " + imageXPos + "," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos + 100));
 
-                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 100) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 100) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 100) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 100) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
+                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 100) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || 
+                            RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 100) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || 
+                            LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 100) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || 
+                            RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 100) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
                         {
                             soundEffect.Play();
                             Score++;
