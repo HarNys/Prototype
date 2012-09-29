@@ -35,8 +35,24 @@ class Cards
         Active = true;
     }
 
-    public void Update()
+    public void Update(int imgScreenPos)
     {
+        int imageXPos = 0;
+        int imageYPos = 0;
+
+
+        if (imgScreenPos % 2 != 0)
+            {
+                imageXPos = 0;
+                imageYPos = ((imgScreenPos / 2) * 250);
+            }
+            else
+            {
+                imageXPos = 300;
+                imageYPos = ((imgScreenPos / 2) * 250);
+            }
+            Vector2 tempPos = new Vector2(imageXPos, imageYPos);
+            Position = tempPos;
         
     }
 

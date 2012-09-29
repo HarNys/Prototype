@@ -51,7 +51,7 @@ namespace Prototype
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         int numCards = 6;
-        Cards[] card;  //Iimage for cards
+        Cards card;  //Iimage for cards
 
         public Game1()
         {
@@ -76,11 +76,7 @@ namespace Prototype
             // TODO: Add your initialization logic here
 
 
-            card = new Cards[numCards];  //creats the cards
-            for (int i = 0; i < numCards; i++)
-                {
-                    card[i] = new Cards();
-                }
+            card = new Cards();  //creats the cards
 
             base.Initialize();
         }
@@ -99,22 +95,11 @@ namespace Prototype
                 int imageXPos = 0;
                 int imageYPos = 0;
             
-            for (int i = 0; i < numCards; i++)
-            {
-                if (i%2 != 0)
-                {
-                    imageXPos = 0;
-                    imageYPos = ((i/2)*250) ;
-                }
-                else
-                {
-                    imageXPos = 300;
-                    imageYPos = ((i / 2) * 250);
-                }
+
 
                 Vector2 imgPosition = new Vector2(imageXPos, imageYPos);
-                card[i].Initialize(Content.Load<Texture2D>("hitBox"), imgPosition);
-            }
+                card.Initialize(Content.Load<Texture2D>("hitBox"), imgPosition);
+            
 
         }
 
@@ -140,6 +125,11 @@ namespace Prototype
 
             // TODO: Add your update logic here
 
+            int[] tempRandomArray = { 1, 2, 3, 4, 5, 6, 3 };
+
+
+            card.Update(tempRandomArray[2]);
+
             base.Update(gameTime);
         }
 
@@ -149,8 +139,8 @@ namespace Prototype
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
+            
             
             // TODO: Add your drawing code here
 
@@ -161,7 +151,7 @@ namespace Prototype
 
             for (int i = 0; i < numCards; i++)
             {
-                card[i].Draw(spriteBatch);
+                card.Draw(spriteBatch);
             }
 
             // Stop drawing
