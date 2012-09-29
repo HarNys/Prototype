@@ -41,7 +41,7 @@ class Cards
         int imageYPos = 0;
 
 
-        if (imgScreenPos % 2 != 0)
+        if (imgScreenPos % 2 == 0)
             {
                 imageXPos = 0;
                 imageYPos = ((imgScreenPos / 2) * 250);

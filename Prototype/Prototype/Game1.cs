@@ -141,10 +141,10 @@ namespace Prototype
 
             // TODO: Add your update logic here
 
-            int[] tempRandomArray = { 1, 2, 3, 4, 5, 6, 3 };
+            int[] tempRandomArray = { 1, 2, 3, 4, 5, 0, 3 };
 
 
-            card.Update(tempRandomArray[2]);
+            card.Update(tempRandomArray[0]);
 
             base.Update(gameTime);
         }
