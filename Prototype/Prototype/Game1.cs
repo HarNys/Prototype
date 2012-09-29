@@ -51,7 +51,13 @@ namespace Prototype
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         int numCards = 6;
+
         Cards card;  //Iimage for cards
+
+        int[] beatSequence;
+
+        Random random = new Random();
+
 
         public Game1()
         {
@@ -79,6 +85,16 @@ namespace Prototype
             card = new Cards();  //creats the cards
 
             base.Initialize();
+        }
+
+        protected void RandomSequence(int beats)
+        {
+
+            beatSequence = new int[beats];
+            for (int i = 0; i < beats; i++)
+            {
+                beatSequence[i] = random.Next(6);
+            }
         }
 
         /// <summary>
