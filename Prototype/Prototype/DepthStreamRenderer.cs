@@ -174,7 +174,7 @@ namespace Prototype
         /// </summary>
         /// <param name="point">The SkeletonPoint to map.</param>
         /// <returns>A Vector2 of the location on the depth frame.</returns>
-        private Vector2 SkeletonToDepthMap(SkeletonPoint point)
+        public Vector2 SkeletonToDepthMap(SkeletonPoint point)
         {
             if ((null != Chooser.Sensor) && (null != Chooser.Sensor.DepthStream))
             {

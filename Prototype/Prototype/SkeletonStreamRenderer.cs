@@ -27,12 +27,12 @@ namespace Prototype
         /// This is the map method called when mapping from
         /// skeleton space to the target space.
         /// </summary>
-        private readonly SkeletonPointMap mapMethod;
+        public readonly SkeletonPointMap mapMethod;
 
         /// <summary>
         /// The last frames skeleton data.
         /// </summary>
-        private static Skeleton[] skeletonData;
+        public static Skeleton[] skeletonData;
 
         /// <summary>
         /// This flag ensures only request a frame once per update call
@@ -64,6 +64,11 @@ namespace Prototype
         /// Whether the rendering has been initialized.
         /// </summary>
         private bool initialized;
+
+        public Vector2 jointPosRHand;
+        public Vector2 jointPosLHand;
+        public Vector2 jointPosRFoot;
+        public Vector2 jointPosLFoot;
 
         /// <summary>
         /// Initializes a new instance of the SkeletonStreamRenderer class.
@@ -181,6 +186,11 @@ namespace Prototype
                         this.DrawBone(skeleton.Joints, JointType.KneeRight, JointType.AnkleRight);
                         this.DrawBone(skeleton.Joints, JointType.AnkleRight, JointType.FootRight);
 
+                        jointPosRHand = this.mapMethod(skeleton.Joints[JointType.HandRight].Position);
+                        jointPosLHand = this.mapMethod(skeleton.Joints[JointType.HandLeft].Position);
+                        jointPosRFoot = this.mapMethod(skeleton.Joints[JointType.FootRight].Position);
+                        jointPosLFoot = this.mapMethod(skeleton.Joints[JointType.FootLeft].Position);
+
                         // Now draw the joints
                         foreach (Joint j in skeleton.Joints)
                         {
@@ -267,9 +277,9 @@ namespace Prototype
     
         /*Made by Harry Nystad 
          Sends the skeleton out so i can work on it */
-        public Vector2 getSkeleton()
+        public bool getSkeletonDrawn()
         {
-            return this.Position;
+            return skeletonDrawn;
         }
     
     }

@@ -34,12 +34,20 @@ namespace Prototype
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         bool newLevel;
+        bool playing;
+
+        Vector2 LHandPos;
+        Vector2 RHandPos;
+        Vector2 LFootPos;
+        Vector2 RFootPos;
 
         Cards card;  //Iimage for cards
 
         int[] beatSequence;
 
         Random random = new Random();
+
+
 
 
         /// <summary>
@@ -63,6 +71,12 @@ namespace Prototype
         /// </summary>
         private readonly DepthStreamRenderer depthStream;
 
+        /// <summary>
+        /// This manages the rendering of the depth stream.
+        /// </summary>
+        private readonly SkeletonStreamRenderer skeletonStream;
+
+        
         /// <summary>
         /// This is the location of the color stream when minimized.
         /// </summary>
@@ -104,7 +118,7 @@ namespace Prototype
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-           
+            
             /*Rezising the window*/
             int Width = 400;
             int Hight = 600;
@@ -125,6 +139,8 @@ namespace Prototype
             this.depthStream.Size = new Vector2(this.viewPortRectangle.Width / 4, this.viewPortRectangle.Height / 4);
             this.depthStream.Position = new Vector2(Width - this.depthStream.Size.X - 15, 85);
 
+            this.skeletonStream = new SkeletonStreamRenderer(this, this.depthStream.SkeletonToDepthMap);
+
             // Store the values so we can animate them later
             this.minSize = this.depthStream.Size;
             this.depthSmallPosition = this.depthStream.Position;
@@ -133,7 +149,6 @@ namespace Prototype
             this.Components.Add(this.chooser);
 
             this.previousKeyboard = Keyboard.GetState();
-
         }
 
         /// <summary>
@@ -144,10 +159,6 @@ namespace Prototype
         /// </summary>
         protected override void Initialize()
         {
-            
-            
-            newLevel = true; //games starts at new level
-
 
             // TODO: Add your initialization logic here
            
@@ -155,7 +166,19 @@ namespace Prototype
             this.Components.Add(this.depthStream);
             this.Components.Add(this.colorStream);
 
+
             card = new Cards();  //creats the hitboxes
+
+
+
+            playing = false;
+         /*   do
+            {
+                newLevel = false;
+            } while (this.skeletonStream.getSkeletonDrawn());*/
+
+           // newLevel = true; //games starts at new level
+
 
             base.Initialize();
         }
@@ -218,24 +241,38 @@ namespace Prototype
                 this.Exit();
 
             // TODO: Add your update logic here
-           
-            
 
-            if (newLevel)
+            LHandPos = this.skeletonStream.jointPosLHand;
+            RHandPos = this.skeletonStream.jointPosRHand;
+            LFootPos = this.skeletonStream.jointPosLFoot;
+            RFootPos = this.skeletonStream.jointPosRFoot;
+
+            Console.WriteLine(LHandPos);
+
+           /* if (LHandPos.X < 100 && LHandPos.Y < 100 || RHandPos.X < 100 && RHandPos.Y < 100)
+            {
+                playing = false;
+            }*/
+
+            if (!playing)
             {
                 RandomSequence(5);
-                newLevel = false;
+                playing = true;
             }
 
-            if (gameTime.TotalGameTime.Seconds < beatSequence.Length)
+            if (playing)
             {
-                card.Update(beatSequence[gameTime.TotalGameTime.Seconds]);
-            }
+                if (gameTime.TotalGameTime.Seconds < beatSequence.Length)
+                {
+                    card.Update(beatSequence[gameTime.TotalGameTime.Seconds]);
+                }
 
-            else
-            {
-                card.Show = false;
+                else
+                {
+                    card.Show = false;
+                }
             }
+            
 
             // Animate the transition value
             if (this.colorHasFocus)
@@ -255,6 +292,17 @@ namespace Prototype
                 }
             }
 
+           
+
+            /*float skeletonPosX //= this.skeletonStream.getSkeleton().X;
+            float skeletonPosY //= this.skeletonStream.getSkeleton().Y;
+            
+
+            if (skeletonPosX < 101 && skeletonPosY < 101)
+            {
+                newLevel = true;
+            }*/
+
             base.Update(gameTime);
         }
 
@@ -269,6 +317,7 @@ namespace Prototype
             //GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
             
             // TODO: Add your drawing code here
+
 
 
 
@@ -309,5 +358,6 @@ namespace Prototype
             // This is necessary because we are rendering to back buffer/render targets and we need to preserve the data
             e.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
         }
+    
     }
 }
