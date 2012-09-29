@@ -1,0 +1,15 @@
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBox.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Bone.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\ChooserBackground.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Header.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Joint.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectColorVisualizer.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectDepthVisualizer.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Segoe16.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Prototype.exe
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Prototype.pdb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Microsoft.Samples.Kinect.SwipeGestureRecognizer.dll
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\obj\x86\Debug\Prototype.exe
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\obj\x86\Debug\Prototype.pdb
