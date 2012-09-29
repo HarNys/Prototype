@@ -166,7 +166,7 @@ namespace Prototype
             base.LoadContent();
 
             // This effect is used to convert depth data to color for display
-            this.kinectDepthVisualizer = Game.Content.Load<Effect>("KinectDepthVisualizer");
+           // this.kinectDepthVisualizer = Game.Content.Load<Effect>("KinectDepthVisualizer");
         }
 
         /// <summary>
