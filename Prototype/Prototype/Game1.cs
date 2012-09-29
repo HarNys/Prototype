@@ -29,12 +29,16 @@ namespace Prototype
 
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-
+        int Score;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         bool newLevel;
         bool playing;
+        int hits;
+        bool boxDipslaying;
+        SoundEffect soundEffect;
+        //int[] testarray={0,1,2,3,4,5};
 
         Vector2 LHandPos;
         Vector2 RHandPos;
@@ -43,7 +47,7 @@ namespace Prototype
 
         Cards card;  //Iimage for cards
 
-        int[] beatSequence;
+        int[] beatSequence = {0,1,2,3,4,5};
 
         Random random = new Random();
 
@@ -161,7 +165,7 @@ namespace Prototype
         {
 
             // TODO: Add your initialization logic here
-           
+            hits = 0;
             
             this.Components.Add(this.depthStream);
             this.Components.Add(this.colorStream);
@@ -179,6 +183,7 @@ namespace Prototype
 
            // newLevel = true; //games starts at new level
 
+            Score = 0;
 
             base.Initialize();
         }
@@ -188,11 +193,11 @@ namespace Prototype
         protected void RandomSequence(int beats)
         {
 
-            beatSequence = new int[beats];
+           /* beatSequence = new int[beats];
             for (int i = 0; i < beats; i++)
             {
-                beatSequence[i] = random.Next(6);
-            }
+ ///////////////////////////////////////////////////////////               beatSequence[i] = random.Next(6);
+            }*/
         }
 
         /// <summary>
@@ -214,6 +219,8 @@ namespace Prototype
 
                 Vector2 imgPosition = new Vector2(imageXPos, imageYPos);
                 card.Initialize(Content.Load<Texture2D>("hitBox"), imgPosition);
+
+                soundEffect = Content.Load<SoundEffect>("lydting");
             
 
         }
@@ -247,16 +254,30 @@ namespace Prototype
             LFootPos = this.depthStream.skeletonStream.jointPosLFoot;
             RFootPos = this.depthStream.skeletonStream.jointPosRFoot;
 
-            Console.WriteLine(LHandPos);
+
+
+            if (playing)
+            {
+                // Console.WriteLine("Hit: " + hits);
+                Console.WriteLine("Score: " + Score);
+                Console.WriteLine("Left hand: " + LHandPos);
+                Console.WriteLine("Rigth Hand: " + RHandPos);
+            }
 
            /* if (LHandPos.X < 100 && LHandPos.Y < 100 || RHandPos.X < 100 && RHandPos.Y < 100)
             {
                 playing = false;
             }*/
 
+            int imageXPos;
+            int imageYPos;
+            
+
+
             if (!playing)
             {
-                RandomSequence(5);
+              //  RandomSequence(6);
+
                 playing = true;
             }
 
@@ -266,11 +287,56 @@ namespace Prototype
                 {
                     card.Update(beatSequence[gameTime.TotalGameTime.Seconds]);
                 }
-
+                
                 else
                 {
                     card.Show = false;
                 }
+
+                imageXPos = 0;
+                imageYPos = ((beatSequence[hits] / 2) * 250);
+
+                if (!card.Show)
+                {
+                    if (beatSequence[hits] % 2 == 0)
+                    {
+                        imageXPos = 0;
+                        imageYPos = ((beatSequence[hits] / 2) * 250);
+
+                        Console.WriteLine("Left: Top: " + imageXPos +"," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos+100));
+
+                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 100) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 100) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 100) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 100) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
+                        {
+                            soundEffect.Play();
+                            Score++;
+                            hits++;
+                        }
+
+
+                    }
+                    else
+                    {
+                        
+
+                        imageXPos = 300;
+                        imageYPos = ((beatSequence[hits] / 2) * 250);
+
+                        Console.WriteLine("Right: Top: " + imageXPos + "," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos + 100));
+
+                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 100) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 100) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 100) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 100) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
+                        {
+                            soundEffect.Play();
+                            Score++;
+                            hits++;
+                        }
+                    }
+                }
+
+                if (hits == beatSequence.Length)
+                {
+                    playing = false;
+                }
+            
             }
             
 

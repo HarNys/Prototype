@@ -6,3 +6,4 @@ Content\Joint.xnb
 Content\KinectColorVisualizer.xnb
 Content\KinectDepthVisualizer.xnb
 Content\Segoe16.xnb
+Content\lydting.xnb
