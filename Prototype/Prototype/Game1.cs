@@ -143,22 +143,17 @@ namespace Prototype
 
             int[] tempRandomArray = { 1, 2, 3, 4, 5, 0, 3 };
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a1999f444b50af305a1c71a5f35912ec6b75fb15
             if (gameTime.TotalGameTime.Seconds < tempRandomArray.Length)
             {
                 card.Update(tempRandomArray[gameTime.TotalGameTime.Seconds]);
             }
-<<<<<<< HEAD
+
             else
             {
                 card.Show = false;
             }
-=======
 
->>>>>>> a1999f444b50af305a1c71a5f35912ec6b75fb15
             base.Update(gameTime);
         }
 

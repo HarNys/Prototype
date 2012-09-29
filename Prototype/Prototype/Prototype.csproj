@@ -66,7 +66,7 @@
       <HintPath>..\..\..\..\Program Files\Microsoft SDKs\Kinect\v1.5\Assemblies\Microsoft.Kinect.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Samples.Kinect.SwipeGestureRecognizer">
-      <HintPath>.\Microsoft.Samples.Kinect.SwipeGestureRecognizer.dll</HintPath>
+      <HintPath>..\PrototypeContent\Microsoft.Samples.Kinect.SwipeGestureRecognizer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
