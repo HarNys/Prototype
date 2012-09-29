@@ -4,25 +4,27 @@ using Microsoft.Xna.Framework.Graphics;
 
 class Cards
 {
-    // Animation representing the player
-    public Texture2D imgTexture;
 
-    // Position of the Player relative to the upper left side of the screen
-    public Vector2 Position;
+    public Texture2D imgTexture;        // Animation representing the hitbox
+    public Vector2 Position;            // Position of the hitbox relative to the upper left side of the screen
+    public bool Show;                   // State of the hitbox
 
-    // State of the player
-    public bool Active;
-
-    // Get the width of the player ship
+    // Get the width of the hitbox
     public int Width
     {
-        get { return imgTexture.Width; }
+        get 
+        { 
+            return imgTexture.Width; 
+        }
     }
 
-    // Get the height of the player ship
+    // Get the height of the hitbox
     public int Height
     {
-        get { return imgTexture.Height; }
+        get 
+        { 
+            return imgTexture.Height; 
+        }
     }
 
 
@@ -32,7 +34,7 @@ class Cards
 
         Position = position;
 
-        Active = true;
+        Show = true;
     }
 
     public void Update(int imgScreenPos)
@@ -41,7 +43,7 @@ class Cards
         int imageYPos = 0;
 
 
-        if (imgScreenPos % 2 != 0)
+        if (imgScreenPos % 2 == 0)
             {
                 imageXPos = 0;
                 imageYPos = ((imgScreenPos / 2) * 250);
@@ -58,6 +60,9 @@ class Cards
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(imgTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+        if (Show)
+        {
+            spriteBatch.Draw(imgTexture, Position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+        }
     }
 }

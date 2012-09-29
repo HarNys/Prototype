@@ -141,11 +141,17 @@ namespace Prototype
 
             // TODO: Add your update logic here
 
-            int[] tempRandomArray = { 1, 2, 3, 4, 5, 6, 3 };
+            int[] tempRandomArray = { 1, 2, 3, 4, 5, 0, 3 };
 
 
-            card.Update(tempRandomArray[2]);
-
+            if (gameTime.TotalGameTime.Seconds < tempRandomArray.Length)
+            {
+                card.Update(tempRandomArray[gameTime.TotalGameTime.Seconds]);
+            }
+            else
+            {
+                card.Show = false;
+            }
             base.Update(gameTime);
         }
 
