@@ -33,7 +33,7 @@ namespace Prototype
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        int numCards = 6;
+        bool newLevel;
 
         Cards card;  //Iimage for cards
 
@@ -86,7 +86,7 @@ namespace Prototype
         /// <summary>
         /// This tracks the state to indicate which stream has focus.
         /// </summary>
-        private bool colorHasFocus = true;
+        private bool colorHasFocus = false;
 
         /// <summary>
         /// This tracks the previous keyboard state.
@@ -144,16 +144,24 @@ namespace Prototype
         /// </summary>
         protected override void Initialize()
         {
-           
+            
+            
+            newLevel = true; //games starts at new level
+
+
             // TODO: Add your initialization logic here
+           
+            
             this.Components.Add(this.depthStream);
             this.Components.Add(this.colorStream);
 
-            card = new Cards();  //creats the cards
+            card = new Cards();  //creats the hitboxes
 
             base.Initialize();
         }
 
+        
+        //Random generator for the placing of boxes
         protected void RandomSequence(int beats)
         {
 
@@ -210,20 +218,24 @@ namespace Prototype
                 this.Exit();
 
             // TODO: Add your update logic here
+           
+            
 
-            int[] tempRandomArray = { 1, 2, 3, 4, 5, 0, 3 };
-
-
-            if (gameTime.TotalGameTime.Seconds < tempRandomArray.Length)
+            if (newLevel)
             {
-                card.Update(tempRandomArray[gameTime.TotalGameTime.Seconds]);
+                RandomSequence(5);
+                newLevel = false;
+            }
+
+            if (gameTime.TotalGameTime.Seconds < beatSequence.Length)
+            {
+                card.Update(beatSequence[gameTime.TotalGameTime.Seconds]);
             }
 
             else
             {
                 card.Show = false;
             }
-
 
             // Animate the transition value
             if (this.colorHasFocus)
@@ -258,20 +270,7 @@ namespace Prototype
             
             // TODO: Add your drawing code here
 
-            // Start drawing
-            spriteBatch.Begin();
 
-            // Draw the cards
-
-            for (int i = 0; i < numCards; i++)
-            {
-                card.Draw(spriteBatch);
-            }
-
-
-
-            // Stop drawing
-            spriteBatch.End();
 
             // Render the streams with respect to focus
             if (this.colorHasFocus)
@@ -287,6 +286,15 @@ namespace Prototype
 
 
             base.Draw(gameTime);
+
+            // Start drawing
+            spriteBatch.Begin();
+
+            // Draw the cards
+            card.Draw(spriteBatch);
+
+            // Stop drawing
+            spriteBatch.End();
         }
 
         /// <summary>

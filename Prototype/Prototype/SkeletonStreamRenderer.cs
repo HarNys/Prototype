@@ -219,6 +219,7 @@ namespace Prototype
                 }
             }
 
+
             this.SharedSpriteBatch.End();
             skeletonDrawn = true;
 
@@ -263,5 +264,13 @@ namespace Prototype
 
             this.SharedSpriteBatch.Draw(this.boneTexture, start, null, color, angle, this.boneOrigin, scale, SpriteEffects.None, 1.0f);
         }
+    
+        /*Made by Harry Nystad 
+         Sends the skeleton out so i can work on it */
+        public Vector2 getSkeleton()
+        {
+            return this.Position;
+        }
+    
     }
 }
