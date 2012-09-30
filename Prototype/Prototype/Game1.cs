@@ -35,14 +35,21 @@ namespace Prototype
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-
+        bool corectHit;
+        int wrongHit;
         bool newLevel;
         bool playing;
         int hits;
         int roundTime;
         int drawTime;
+        int newLevelTimer;
         float updateTime;
+        int hitTimer;
+        bool nexthit;
         SoundEffect soundEffect;
+        SoundEffect wrongHitSound;
+        SoundEffect gameOverSound;
+
         //int[] testarray={0,1,2,3,4,5};
 
         Vector2 LHandPos;
@@ -170,10 +177,16 @@ namespace Prototype
         /// </summary>
         protected override void Initialize()
         {
-            
+            corectHit = false;
+            newLevel = false;
             roundTime = 0;
             drawTime = 0;
             updateTime = 0;
+            newLevelTimer = 0;
+            wrongHit = 0;
+
+            hitTimer = 0;
+            nexthit = true;
             // TODO: Add your initialization logic here
             hits = 0;
             lvl = 0;
@@ -215,6 +228,14 @@ namespace Prototype
             for (int i = 0; i < beats; i++)
             {
                 beatSequence[i] = random.Next(6);
+                
+                if(i>0)
+                {           //prvents from two circles in same spot
+                    while (beatSequence[i] == beatSequence[i - 1])
+                    {
+                        beatSequence[i] = random.Next(6);
+                    }
+                }
             }
         }
 
@@ -236,13 +257,16 @@ namespace Prototype
             this.Services.AddService(typeof(SpriteBatch), this.spriteBatch);
 
             Vector2 imgPosition = new Vector2(imageXPos, imageYPos);
-            card.Initialize(Content.Load<Texture2D>("hitBoxGreen"), imgPosition);
+            card.Initialize(Content.Load<Texture2D>("hitCircleHit"), imgPosition);
             scoreFont = Content.Load<SpriteFont>("SpriteFont1");
             soundEffect = Content.Load<SoundEffect>("lydting");
 
+            wrongHitSound = Content.Load<SoundEffect>("wronghit");
+            gameOverSound = Content.Load<SoundEffect>("Gameover");
+
             for (int i = 0; i < 6; i++)
             {
-                hitBox[i].Initialize(Content.Load<Texture2D>("hitBox"), imgPosition);
+                hitBox[i].Initialize(Content.Load<Texture2D>("hitCircle"), imgPosition);
             }
             
 
@@ -270,158 +294,269 @@ namespace Prototype
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
-
-            LHandPos = this.depthStream.skeletonStream.jointPosLHand;
-            RHandPos = this.depthStream.skeletonStream.jointPosRHand;
-            LFootPos = this.depthStream.skeletonStream.jointPosLFoot;
-            RFootPos = this.depthStream.skeletonStream.jointPosRFoot;
-
-
-            for (int i = 0; i < 6; i++)
-            {
-                hitBox[i].Update(i);
-            }
-
-
-            if (playing)
-            {
-                 Console.WriteLine("Hit: " + hits);
-                Console.WriteLine("score: " + score);
-                Console.WriteLine("Left hand: " + LHandPos + " Rigth Hand: " + RHandPos);
-               // Console.WriteLine("Rigth Hand: " + RHandPos);
-            }
-
-           /* if (LHandPos.X < 100 && LHandPos.Y < 100 || RHandPos.X < 100 && RHandPos.Y < 100)
-            {
-                playing = false;
-            }*/
-
-            int imageXPos;
-            int imageYPos;
             
-
-
-            if (!playing)
-            {
-                RandomSequence(2+lvl);
-
-                playing = true;
-            }
-
-            //draw shapes again if player have not finish in 15 sec
-            if ((gameTime.TotalGameTime.Seconds - roundTime) > (15+lvl))
-            {
-                card.Show = true;
-                drawTime = 0;
-                score =-2;
-                hits = 0;
-                roundTime = gameTime.TotalGameTime.Seconds;
-            }
-
-            if (playing)
-            {
-                if (drawTime < beatSequence.Length)
-                {
-                    card.Update(beatSequence[drawTime]);
-                    drawTime = (gameTime.TotalGameTime.Seconds - roundTime);
-                    updateTime = 0;
-                }
-                
-                else
-                {
-                    card.Show = false;
-                }
-
-                if (!card.Show && playing)
-                {
-
-
-                    imageXPos = 0;
-                    imageYPos = ((beatSequence[hits] / 2) * 250);
-
-                    card.Update(beatSequence[hits]);
-
-                    if (beatSequence[hits] % 2 == 0)
-                    {
-                        imageXPos = 0;
-                        imageYPos = ((beatSequence[hits] / 2) * 200);
-
-                        //Console.WriteLine("Left: Top: " + imageXPos +"," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos+100));
-
-                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 150) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || 
-                            RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 150) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || 
-                            LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 150) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || 
-                            RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 150) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
-                        {
-                            soundEffect.Play();
-                            score++;
-                            hits++;
-                        }
-                    }
-                    else
-                    {
-
-                        imageXPos = 500; //Kinect sucks balls, thats why
-                        imageYPos = ((beatSequence[hits] / 2) * 200);
-
-                       // Console.WriteLine("Right: Top: " + imageXPos + "," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos + 100));
-
-                        if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 150) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) || 
-                            RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 150) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) || 
-                            LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 150) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) || 
-                            RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 150) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
-                        {
-                            soundEffect.Play();
-                            score++;
-                            hits++;
-                        }
-                    }
-                }
-
-                //new level starts
-                if (beatSequence.Length == hits)
-                {
-                    playing = false;
-                    card.Show = true;
-                    hits = 0;
-                    drawTime = 0;
-                    roundTime = gameTime.TotalGameTime.Seconds;
-                    lvl++;
-                }
-            
-            }
-            
-
-            // Animate the transition value
-            if (this.colorHasFocus)
-            {
-                this.transition -= gameTime.ElapsedGameTime.TotalSeconds;
-                if (this.transition < 0)
-                {
-                    this.transition = 0;
-                }
-            }
-            else
-            {
-                this.transition += gameTime.ElapsedGameTime.TotalSeconds;
-                if (this.transition > TransitionDuration)
-                {
-                    this.transition = TransitionDuration;
-                }
-            }
-
-           
-
-            /*float skeletonPosX //= this.skeletonStream.getSkeleton().X;
-            float skeletonPosY //= this.skeletonStream.getSkeleton().Y;
-            
-
-            if (skeletonPosX < 101 && skeletonPosY < 101)
+            //trying to make the game wait for some time before next level starts           
+            if ((gameTime.TotalGameTime.Seconds - newLevelTimer) > 2 && !newLevel)
             {
                 newLevel = true;
-            }*/
+                roundTime = gameTime.TotalGameTime.Seconds;
+                card.Show = true;
+            }
+            else if (!newLevel)
+            {
+                card.Show = false;
+            }
 
+            
+            
+            // TODO: Add your update logic here
+
+
+                LHandPos = this.depthStream.skeletonStream.jointPosLHand;
+                RHandPos = this.depthStream.skeletonStream.jointPosRHand;
+                LFootPos = this.depthStream.skeletonStream.jointPosLFoot;
+                RFootPos = this.depthStream.skeletonStream.jointPosRFoot;
+
+
+                for (int i = 0; i < 6; i++)
+                {
+                    hitBox[i].Update(i);
+                }
+
+
+                if (playing)
+                {
+                    Console.WriteLine("Hit: " + hits);
+                    Console.WriteLine("score: " + score);
+                    Console.WriteLine("Left hand: " + LHandPos + " Rigth Hand: " + RHandPos);
+                    // Console.WriteLine("Rigth Hand: " + RHandPos);
+                }
+
+                /* if (LHandPos.X < 100 && LHandPos.Y < 100 || RHandPos.X < 100 && RHandPos.Y < 100)
+                 {
+                     playing = false;
+                 }*/
+
+                int imageXPos;
+                int imageYPos;
+
+                if (!playing)
+                {
+                    RandomSequence(2 + lvl);
+
+                    playing = true;
+                }
+
+                //draw shapes again if player have not finish in 15 sec
+                if (newLevel && (gameTime.TotalGameTime.Seconds - roundTime) > (10 + lvl))
+                {
+                    card.Show = true;
+                    drawTime = 0;
+                    score = score-2;
+                    hits = 0;
+                    roundTime = gameTime.TotalGameTime.Seconds;
+                }
+
+                if (newLevel && playing)
+                {
+                    //gameTime.TotalGameTime is reseting it self, so we have to make up for it
+                   if (gameTime.TotalGameTime.Seconds ==0)
+                    {
+                        drawTime = 0;
+                        roundTime = 0;
+                        hitTimer = 0;
+                    }
+
+
+                    if (drawTime < beatSequence.Length)
+                    {
+                        card.Update(beatSequence[drawTime]);
+                        drawTime = (gameTime.TotalGameTime.Seconds - roundTime);
+                        updateTime = 0;
+                    }
+
+                    else
+                    {
+                        card.Show = false;
+                    }
+
+                    if (!card.Show && playing)
+                    {
+
+
+                        imageXPos = 0;
+                        imageYPos = ((beatSequence[hits] / 2) * 250);
+
+                        card.Update(beatSequence[hits]);
+
+                        if (beatSequence[hits] % 2 == 0)
+                        {
+                            imageXPos = 0;
+                            imageYPos = ((beatSequence[hits] / 2) * 200);
+
+                            //Console.WriteLine("Left: Top: " + imageXPos +"," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos+100));
+
+                            if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 150) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) ||
+                                RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 150) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) ||
+                                LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 150) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) ||
+                                RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 150) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
+                            {
+                                soundEffect.Play();
+                                score++;
+                                hits++;
+                                nexthit = false;
+
+                                //draw a circle to indicate hit
+                                card.Update(hits);
+                                card.Show = true;
+                                spriteBatch.Begin();
+                                card.Draw(spriteBatch);
+                                spriteBatch.End();
+                                corectHit = true;
+                                hitTimer = gameTime.TotalGameTime.Seconds;
+                                //card.Show = false;
+                            }
+                        }
+                        else
+                        {
+
+                            imageXPos = 500; //Kinect sucks balls, thats why
+                            imageYPos = ((beatSequence[hits] / 2) * 200);
+
+                            // Console.WriteLine("Right: Top: " + imageXPos + "," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos + 100));
+
+                            if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 150) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) ||
+                                RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 150) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) ||
+                                LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 150) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) ||
+                                RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 150) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
+                            {
+                                soundEffect.Play();
+                                score++;
+                                hits++;
+                                nexthit = false;
+
+                                //draw a circle to indicate hit
+                                card.Update(hits);
+                                card.Show = true;
+                                spriteBatch.Begin();
+                                card.Draw(spriteBatch);
+                                spriteBatch.End();
+                                corectHit = true;
+                                hitTimer = gameTime.TotalGameTime.Seconds;
+                                // card.Show = false;
+                            }
+                        }
+
+  ////////////////////////////if you hit wrong//////////////////////////////////////////////////////////
+                       
+                        for (int i = 0; i < 6; i++)
+                        {
+                            if (!corectHit && nexthit)
+                            {
+                                if (i % 2 == 0)
+                                {
+                                    imageXPos = 0;
+                                    imageYPos = ((i / 2) * 200);
+
+                                    //Console.WriteLine("Left: Top: " + imageXPos +"," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos+100));
+
+                                    if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 150) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) ||
+                                         RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 150) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) ||
+                                         LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 150) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) ||
+                                         RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 150) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
+                                    {
+                                        wrongHit++;
+                                        nexthit = false;
+                                        hitTimer = gameTime.TotalGameTime.Seconds;
+                                        wrongHitSound.Play();
+                                    }
+                                }
+                                else
+                                {
+
+                                    imageXPos = 500; //Kinect sucks balls, thats why
+                                    imageYPos = ((i / 2) * 200);
+
+                                    if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 150) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) ||
+                                    RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 150) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) ||
+                                    LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 150) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) ||
+                                    RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 150) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
+                                    {
+                                        wrongHit++;
+                                        nexthit = false;
+                                        hitTimer = gameTime.TotalGameTime.Seconds;
+                                        wrongHitSound.Play();
+                                    }
+
+                                }
+                                if (wrongHit > 2)
+                                {
+                                    lvl = 0;
+                                    playing = false;
+                                    card.Show = true;
+                                    hits = 0;
+                                    drawTime = 0;
+                                    roundTime = gameTime.TotalGameTime.Seconds;
+                                    newLevel = false; //yes its backwards, just dael with it 
+                                    newLevelTimer = gameTime.TotalGameTime.Seconds;
+                                    wrongHit = 0;
+                                    score = 0;
+                                    hitTimer = gameTime.TotalGameTime.Seconds;
+                                    gameOverSound.Play();
+                                    
+
+                                }
+
+
+                             }
+                        }
+
+                        if ((gameTime.TotalGameTime.Seconds - hitTimer) > 1 && !nexthit)
+                        {
+                            nexthit = true;
+                            hitTimer = gameTime.TotalGameTime.Seconds;
+                            corectHit = false;
+                        }
+///////////////////////////////////////////////////////////////////////////////////////////////
+                    }
+
+                    //new level starts
+                    if (beatSequence.Length == hits)
+                    {
+                        lvl++;
+                        playing = false;
+                        card.Show = true;
+                        hits = 0;
+                        drawTime = 0;
+                        roundTime = gameTime.TotalGameTime.Seconds;
+                        newLevel = false; //yes its backwards, just dael with it 
+                        newLevelTimer = gameTime.TotalGameTime.Seconds;
+                        wrongHit = 0;
+
+                    }
+
+                }
+
+
+                // Animate the transition value
+                if (this.colorHasFocus)
+                {
+                    this.transition -= gameTime.ElapsedGameTime.TotalSeconds;
+                    if (this.transition < 0)
+                    {
+                        this.transition = 0;
+                    }
+                }
+                else
+                {
+                    this.transition += gameTime.ElapsedGameTime.TotalSeconds;
+                    if (this.transition > TransitionDuration)
+                    {
+                        this.transition = TransitionDuration;
+                    }
+                }
+
+            
             base.Update(gameTime);
         }
 
@@ -454,7 +589,6 @@ namespace Prototype
 
 
             base.Draw(gameTime);
-
 
 
 

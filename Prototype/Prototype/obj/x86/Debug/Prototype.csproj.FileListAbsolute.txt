@@ -16,3 +16,7 @@ C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Segoe16.xnb
 C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\lydting.xnb
 C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\SpriteFont1.xnb
 C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBoxGreen.xnb
+C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCircle.xnb
+C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCircleHit.xnb
+C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\wronghit.xnb
+C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Gameover.xnb
