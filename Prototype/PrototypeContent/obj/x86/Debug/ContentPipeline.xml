@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBox.xnb</Output>
-      <Time>2012-09-29T11:21:21.9604329+02:00</Time>
+      <Time>2012-09-30T03:10:36.5160843+02:00</Time>
     </Item>
     <Item>
       <Source>Bone.png</Source>
@@ -90,6 +90,15 @@
       <Options>None</Options>
       <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
       <Time>2012-09-30T00:49:09.7179512+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitBoxGreen.png</Source>
+      <Name>hitBoxGreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBoxGreen.xnb</Output>
+      <Time>2012-09-30T03:10:55.1521502+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

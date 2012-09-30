@@ -39,7 +39,9 @@ namespace Prototype
         bool newLevel;
         bool playing;
         int hits;
-        bool boxDipslaying;
+        int roundTime;
+        int drawTime;
+        float updateTime;
         SoundEffect soundEffect;
         //int[] testarray={0,1,2,3,4,5};
 
@@ -49,6 +51,7 @@ namespace Prototype
         Vector2 RFootPos;
 
         Cards card;  //Iimage for cards
+        Cards[] hitBox;
         SpriteFont scoreFont;
 
         int[] beatSequence;
@@ -167,7 +170,10 @@ namespace Prototype
         /// </summary>
         protected override void Initialize()
         {
-
+            
+            roundTime = 0;
+            drawTime = 0;
+            updateTime = 0;
             // TODO: Add your initialization logic here
             hits = 0;
             lvl = 0;
@@ -177,7 +183,14 @@ namespace Prototype
 
 
             card = new Cards();  //creats the hitboxes
+            hitBox = new Cards[6];
 
+            for (int i = 0; i<6;i++)
+            {
+                hitBox[i] = new Cards();
+                hitBox[i].Show = true;
+                hitBox[i].Update(i);
+            }
 
             card.Show = true;
             playing = false;
@@ -216,16 +229,21 @@ namespace Prototype
 
             // TODO: use this.Content to load your game content here
             // ;Load the sprit resources
-                int imageXPos = 0;
-                int imageYPos = 0;
+            int imageXPos = 0;
+            int imageYPos = 0;
 
-                this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
-                this.Services.AddService(typeof(SpriteBatch), this.spriteBatch);
+            this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            this.Services.AddService(typeof(SpriteBatch), this.spriteBatch);
 
-                Vector2 imgPosition = new Vector2(imageXPos, imageYPos);
-                card.Initialize(Content.Load<Texture2D>("hitBox"), imgPosition);
-                scoreFont = Content.Load<SpriteFont>("SpriteFont1");
-                soundEffect = Content.Load<SoundEffect>("lydting");
+            Vector2 imgPosition = new Vector2(imageXPos, imageYPos);
+            card.Initialize(Content.Load<Texture2D>("hitBoxGreen"), imgPosition);
+            scoreFont = Content.Load<SpriteFont>("SpriteFont1");
+            soundEffect = Content.Load<SoundEffect>("lydting");
+
+            for (int i = 0; i < 6; i++)
+            {
+                hitBox[i].Initialize(Content.Load<Texture2D>("hitBox"), imgPosition);
+            }
             
 
         }
@@ -260,6 +278,11 @@ namespace Prototype
             RFootPos = this.depthStream.skeletonStream.jointPosRFoot;
 
 
+            for (int i = 0; i < 6; i++)
+            {
+                hitBox[i].Update(i);
+            }
+
 
             if (playing)
             {
@@ -281,24 +304,36 @@ namespace Prototype
 
             if (!playing)
             {
-                RandomSequence(5+lvl);
+                RandomSequence(2+lvl);
 
                 playing = true;
             }
 
+            //draw shapes again if player have not finish in 15 sec
+            if ((gameTime.TotalGameTime.Seconds - roundTime) > (15+lvl))
+            {
+                card.Show = true;
+                drawTime = 0;
+                score =-2;
+                hits = 0;
+                roundTime = gameTime.TotalGameTime.Seconds;
+            }
+
             if (playing)
             {
-                if (gameTime.TotalGameTime.Seconds < beatSequence.Length)
+                if (drawTime < beatSequence.Length)
                 {
-                    card.Update(beatSequence[gameTime.TotalGameTime.Seconds]);
+                    card.Update(beatSequence[drawTime]);
+                    drawTime = (gameTime.TotalGameTime.Seconds - roundTime);
+                    updateTime = 0;
                 }
                 
-               // else
-              //  {
-               //     card.Show = false;
-                //}
+                else
+                {
+                    card.Show = false;
+                }
 
-                if (card.Show && playing)
+                if (!card.Show && playing)
                 {
 
 
@@ -344,10 +379,15 @@ namespace Prototype
                     }
                 }
 
+                //new level starts
                 if (beatSequence.Length == hits)
                 {
                     playing = false;
+                    card.Show = true;
                     hits = 0;
+                    drawTime = 0;
+                    roundTime = gameTime.TotalGameTime.Seconds;
+                    lvl++;
                 }
             
             }
@@ -415,13 +455,26 @@ namespace Prototype
 
             base.Draw(gameTime);
 
+
+
+
             // Start drawing
             spriteBatch.Begin();
 
-            // Draw the cards
+            // Draw
+            for (int i = 0; i < 6; i++)
+            {
+                hitBox[i].Draw(spriteBatch);
+            }
+
+
+
             card.Draw(spriteBatch);
             spriteBatch.DrawString(scoreFont, "score: " + score, new  Vector2 (150,10), Microsoft.Xna.Framework.Color.HotPink);
+            spriteBatch.DrawString(scoreFont, "Level: " + (lvl+1), new Vector2(150, 30), Microsoft.Xna.Framework.Color.HotPink);
 
+
+            
             // Stop drawing
             spriteBatch.End();
         }
