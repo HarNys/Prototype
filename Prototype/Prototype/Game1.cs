@@ -50,6 +50,8 @@ namespace Prototype
         SoundEffect wrongHitSound;
         SoundEffect gameOverSound;
 
+        
+
         //int[] testarray={0,1,2,3,4,5};
 
         Vector2 LHandPos;
@@ -62,6 +64,10 @@ namespace Prototype
         SpriteFont scoreFont;
 
         int[] beatSequence;
+
+        SoundEffect[] sounds;
+
+
 
         Random random = new Random();
 
@@ -219,6 +225,8 @@ namespace Prototype
             base.Initialize();
         }
         
+       
+
         //Random generator for the placing of boxes
         protected void RandomSequence(int beats)
         {
@@ -249,7 +257,7 @@ namespace Prototype
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            // ;Load the sprit resources
+            // Load the sprit resources
             int imageXPos = 0;
             int imageYPos = 0;
 
@@ -259,14 +267,29 @@ namespace Prototype
             Vector2 imgPosition = new Vector2(imageXPos, imageYPos);
             card.Initialize(Content.Load<Texture2D>("hitCircleHit"), imgPosition);
             scoreFont = Content.Load<SpriteFont>("SpriteFont1");
-            soundEffect = Content.Load<SoundEffect>("lydting");
 
-            wrongHitSound = Content.Load<SoundEffect>("wronghit");
-            gameOverSound = Content.Load<SoundEffect>("Gameover");
+            sounds = new SoundEffect[6];
+
+            sounds[0] = Content.Load<SoundEffect>("hitRedSound");
+            sounds[1] = Content.Load<SoundEffect>("hitGreenSound");
+            sounds[2] = Content.Load<SoundEffect>("hitYellowSound");
+            sounds[3] = Content.Load<SoundEffect>("hitBlueSound");
+            sounds[4] = Content.Load<SoundEffect>("hitPurpleSound");
+            sounds[5] = Content.Load<SoundEffect>("hitOrangeSound");
+
+
+            wrongHitSound =  Content.Load<SoundEffect>("wronghit");
+            gameOverSound =  Content.Load<SoundEffect>("Gameover");
+      
 
             for (int i = 0; i < 6; i++)
             {
-                hitBox[i].Initialize(Content.Load<Texture2D>("hitCircle"), imgPosition);
+                hitBox[0].Initialize(Content.Load<Texture2D>("hitCircleRed"), imgPosition);
+                hitBox[1].Initialize(Content.Load<Texture2D>("hitCircleGreen"), imgPosition);
+                hitBox[2].Initialize(Content.Load<Texture2D>("hitCircleBlue"), imgPosition);
+                hitBox[3].Initialize(Content.Load<Texture2D>("hitCircleYellow"), imgPosition);
+                hitBox[4].Initialize(Content.Load<Texture2D>("hitCircleOrange"), imgPosition);
+                hitBox[5].Initialize(Content.Load<Texture2D>("hitCirclePurple"), imgPosition);
             }
             
 
@@ -388,23 +411,25 @@ namespace Prototype
                         imageYPos = ((beatSequence[hits] / 2) * 250);
 
                         card.Update(beatSequence[hits]);
+                        
 
                         if (beatSequence[hits] % 2 == 0)
                         {
                             imageXPos = 0;
                             imageYPos = ((beatSequence[hits] / 2) * 200);
-
-                            //Console.WriteLine("Left: Top: " + imageXPos +"," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos+100));
+                            
 
                             if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 150) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) ||
                                 RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 150) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) ||
                                 LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 150) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) ||
                                 RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 150) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
                             {
-                                soundEffect.Play();
+
+                                sounds[beatSequence[hits]].Play();
                                 score++;
                                 hits++;
                                 nexthit = false;
+
 
                                 //draw a circle to indicate hit
                                 card.Update(hits);
@@ -415,22 +440,28 @@ namespace Prototype
                                 corectHit = true;
                                 hitTimer = gameTime.TotalGameTime.Seconds;
                                 //card.Show = false;
+
+                               // sounds[beatSequence[hits]].Play();
+
                             }
                         }
                         else
                         {
 
                             imageXPos = 500; //Kinect sucks balls, thats why
-                            imageYPos = ((beatSequence[hits] / 2) * 200);
-
+                            imageYPos = ((beatSequence[hits] / 2) * 200); 
+                            
                             // Console.WriteLine("Right: Top: " + imageXPos + "," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos + 100));
+
+
+
 
                             if (LHandPos.X > imageXPos && LHandPos.X < (imageXPos + 150) && LHandPos.Y > imageYPos && LHandPos.Y < (imageYPos + 100) ||
                                 RHandPos.X > imageXPos && RHandPos.X < (imageXPos + 150) && RHandPos.Y > imageYPos && RHandPos.Y < (imageYPos + 100) ||
                                 LFootPos.X > imageXPos && LFootPos.X < (imageXPos + 150) && LFootPos.Y > imageYPos && LFootPos.Y < (imageYPos + 100) ||
                                 RFootPos.X > imageXPos && RFootPos.X < (imageXPos + 150) && RFootPos.Y > imageYPos && RFootPos.Y < (imageYPos + 100))
                             {
-                                soundEffect.Play();
+                                sounds[beatSequence[hits]].Play();
                                 score++;
                                 hits++;
                                 nexthit = false;
@@ -443,6 +474,8 @@ namespace Prototype
                                 spriteBatch.End();
                                 corectHit = true;
                                 hitTimer = gameTime.TotalGameTime.Seconds;
+                                
+
                                 // card.Show = false;
                             }
                         }
@@ -571,9 +604,6 @@ namespace Prototype
             //GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
             
             // TODO: Add your drawing code here
-
-
-
 
             // Render the streams with respect to focus
             if (this.colorHasFocus)

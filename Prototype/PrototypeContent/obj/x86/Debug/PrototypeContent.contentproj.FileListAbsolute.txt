@@ -1,1 +1,2 @@
 C:\skole\Prototype\Prototype\PrototypeContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\PrototypeContent\obj\x86\Debug\ResolveAssemblyReference.cache

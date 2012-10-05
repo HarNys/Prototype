@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBox.xnb</Output>
-      <Time>2012-09-30T03:42:23.6681671+02:00</Time>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBox.xnb</Output>
+      <Time>2012-10-01T10:39:03.6774472+02:00</Time>
     </Item>
     <Item>
       <Source>Bone.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Bone.xnb</Output>
-      <Time>2012-07-29T18:23:28+02:00</Time>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Bone.xnb</Output>
+      <Time>2012-10-01T10:39:03.6374449+02:00</Time>
     </Item>
     <Item>
       <Source>ChooserBackground.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\ChooserBackground.xnb</Output>
-      <Time>2012-07-29T18:23:28+02:00</Time>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\ChooserBackground.xnb</Output>
+      <Time>2012-10-01T10:39:03.639445+02:00</Time>
     </Item>
     <Item>
       <Source>Header.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Header.xnb</Output>
-      <Time>2012-07-29T18:23:28+02:00</Time>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Header.xnb</Output>
+      <Time>2012-10-01T10:39:03.656446+02:00</Time>
     </Item>
     <Item>
       <Source>Joint.png</Source>
@@ -43,53 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Joint.xnb</Output>
-      <Time>2012-07-29T18:23:28+02:00</Time>
-    </Item>
-    <Item>
-      <Source>KinectColorVisualizer.fx</Source>
-      <Name>KinectColorVisualizer</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectColorVisualizer.xnb</Output>
-      <Time>2012-07-29T18:23:28+02:00</Time>
-    </Item>
-    <Item>
-      <Source>KinectDepthVisualizer.fx</Source>
-      <Name>KinectDepthVisualizer</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectDepthVisualizer.xnb</Output>
-      <Time>2012-07-29T18:23:28+02:00</Time>
-    </Item>
-    <Item>
-      <Source>Segoe16.spritefont</Source>
-      <Name>Segoe16</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Segoe16.xnb</Output>
-      <Time>2012-07-29T18:23:28+02:00</Time>
-    </Item>
-    <Item>
-      <Source>lydting.wav</Source>
-      <Name>lydting</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\lydting.xnb</Output>
-      <Time>2012-09-30T03:42:23.6721673+02:00</Time>
-    </Item>
-    <Item>
-      <Source>SpriteFont1.spritefont</Source>
-      <Name>SpriteFont1</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
-      <Time>2012-09-30T03:42:23.666167+02:00</Time>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Joint.xnb</Output>
+      <Time>2012-10-01T10:39:03.6584461+02:00</Time>
     </Item>
     <Item>
       <Source>hitBoxGreen.png</Source>
@@ -97,17 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBoxGreen.xnb</Output>
-      <Time>2012-09-30T03:42:23.6691672+02:00</Time>
-    </Item>
-    <Item>
-      <Source>hitCircle.png</Source>
-      <Name>hitCircle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCircle.xnb</Output>
-      <Time>2012-09-30T13:15:31.0204512+02:00</Time>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBoxGreen.xnb</Output>
+      <Time>2012-10-01T10:39:03.6784473+02:00</Time>
     </Item>
     <Item>
       <Source>hitCircleHit.png</Source>
@@ -115,8 +61,44 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCircleHit.xnb</Output>
-      <Time>2012-09-30T13:45:15.0608547+02:00</Time>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCircleHit.xnb</Output>
+      <Time>2012-10-01T10:39:03.6814474+02:00</Time>
+    </Item>
+    <Item>
+      <Source>KinectColorVisualizer.fx</Source>
+      <Name>KinectColorVisualizer</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectColorVisualizer.xnb</Output>
+      <Time>2012-10-01T10:39:03.6594462+02:00</Time>
+    </Item>
+    <Item>
+      <Source>KinectDepthVisualizer.fx</Source>
+      <Name>KinectDepthVisualizer</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\KinectDepthVisualizer.xnb</Output>
+      <Time>2012-10-01T10:39:03.6604462+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Segoe16.spritefont</Source>
+      <Name>Segoe16</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Segoe16.xnb</Output>
+      <Time>2012-10-01T10:39:03.673447+02:00</Time>
+    </Item>
+    <Item>
+      <Source>SpriteFont1.spritefont</Source>
+      <Name>SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
+      <Time>2012-10-01T10:39:03.674447+02:00</Time>
     </Item>
     <Item>
       <Source>wronghit.wav</Source>
@@ -124,8 +106,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\wronghit.xnb</Output>
-      <Time>2012-09-30T15:35:43.7978827+02:00</Time>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\wronghit.xnb</Output>
+      <Time>2012-10-01T10:39:03.7164494+02:00</Time>
     </Item>
     <Item>
       <Source>Gameover.wav</Source>
@@ -133,8 +115,116 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Gameover.xnb</Output>
-      <Time>2012-09-30T15:35:11.8990582+02:00</Time>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\Gameover.xnb</Output>
+      <Time>2012-10-01T10:39:03.6534458+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitCircleBlue.png</Source>
+      <Name>hitCircleBlue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCircleBlue.xnb</Output>
+      <Time>2012-10-01T10:39:03.6804474+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitCircleGreen.png</Source>
+      <Name>hitCircleGreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCircleGreen.xnb</Output>
+      <Time>2012-10-02T09:09:53.4553715+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitCircleOrange.png</Source>
+      <Name>hitCircleOrange</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCircleOrange.xnb</Output>
+      <Time>2012-10-02T09:11:02.2703075+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitCirclePurple.png</Source>
+      <Name>hitCirclePurple</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCirclePurple.xnb</Output>
+      <Time>2012-10-02T09:10:44.0382647+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitCircleRed.png</Source>
+      <Name>hitCircleRed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCircleRed.xnb</Output>
+      <Time>2012-10-02T09:10:21.0229483+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitCircleYellow.png</Source>
+      <Name>hitCircleYellow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitCircleYellow.xnb</Output>
+      <Time>2012-10-02T09:10:09.7043009+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitGreenSound.wav</Source>
+      <Name>hitGreenSound</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitGreenSound.xnb</Output>
+      <Time>2012-10-04T17:39:16.0417279+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitOrangeSound.wav</Source>
+      <Name>hitOrangeSound</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitOrangeSound.xnb</Output>
+      <Time>2012-10-05T12:10:30.8658631+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitPurpleSound.wav</Source>
+      <Name>hitPurpleSound</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitPurpleSound.xnb</Output>
+      <Time>2012-10-05T12:11:17.9559301+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitRedSound.wav</Source>
+      <Name>hitRedSound</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitRedSound.xnb</Output>
+      <Time>2012-10-04T17:36:30.3594422+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitYellowSound.wav</Source>
+      <Name>hitYellowSound</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitYellowSound.xnb</Output>
+      <Time>2012-10-04T17:42:18.161009+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hitBlueSound.wav</Source>
+      <Name>hitBlueSound</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBlueSound.xnb</Output>
+      <Time>2012-10-05T14:11:08.0512406+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -142,10 +232,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\skole\Prototype\Prototype\PrototypeContent\</RootDirectory>
-      <LoggerRootDirectory>C:\skole\Prototype\Prototype\Prototype\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\skole\Prototype\Prototype\PrototypeContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\skole\Prototype\Prototype\Prototype\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\PrototypeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\PrototypeContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -173,16 +263,16 @@
         <Value>2010-08-23T12:41:18+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\skole\Prototype\Prototype\PrototypeContent\Microsoft.Samples.Kinect.SwipeGestureRecognizer.dll</Key>
-        <Value>2012-09-29T11:21:21.9434319+02:00</Value>
+        <Key>C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\PrototypeContent\Microsoft.Samples.Kinect.SwipeGestureRecognizer.dll</Key>
+        <Value>2012-10-01T10:39:03.6694467+02:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\Microsoft.Kinect\v4.0_1.5.0.0__31bf3856ad364e35\Microsoft.Kinect.dll</Key>
-        <Value>2012-09-28T19:10:36.8411917+02:00</Value>
+        <Value>2012-09-10T14:09:45.0576654+02:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-09-28T18:20:32.2983417+02:00</Value>
+        <Value>2012-09-29T00:41:50.7186837+02:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
