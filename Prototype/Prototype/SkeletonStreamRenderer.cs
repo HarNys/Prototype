@@ -162,6 +162,8 @@ namespace Prototype
                 {
                     case SkeletonTrackingState.Tracked:
                         // Draw Bones
+
+                        /*
                         this.DrawBone(skeleton.Joints, JointType.Head, JointType.ShoulderCenter);
                         this.DrawBone(skeleton.Joints, JointType.ShoulderCenter, JointType.ShoulderLeft);
                         this.DrawBone(skeleton.Joints, JointType.ShoulderCenter, JointType.ShoulderRight);
@@ -185,12 +187,12 @@ namespace Prototype
                         this.DrawBone(skeleton.Joints, JointType.HipRight, JointType.KneeRight);
                         this.DrawBone(skeleton.Joints, JointType.KneeRight, JointType.AnkleRight);
                         this.DrawBone(skeleton.Joints, JointType.AnkleRight, JointType.FootRight);
-
+                        */
                         jointPosRHand = this.mapMethod(skeleton.Joints[JointType.HandRight].Position);
                         jointPosLHand = this.mapMethod(skeleton.Joints[JointType.HandLeft].Position);
                         jointPosRFoot = this.mapMethod(skeleton.Joints[JointType.FootRight].Position);
                         jointPosLFoot = this.mapMethod(skeleton.Joints[JointType.FootLeft].Position);
-
+                        /*
                         // Now draw the joints
                         foreach (Joint j in skeleton.Joints)
                         {
@@ -211,7 +213,7 @@ namespace Prototype
                                 SpriteEffects.None,
                                 0.0f);
                         }
-
+                        */
                         break;
                     case SkeletonTrackingState.PositionOnly:
                         // If we are only tracking position, draw a blue dot
@@ -256,6 +258,8 @@ namespace Prototype
         /// <param name="joints">The joint data.</param>
         /// <param name="startJoint">The starting joint.</param>
         /// <param name="endJoint">The ending joint.</param>
+        /// 
+        /*
         private void DrawBone(JointCollection joints, JointType startJoint, JointType endJoint)
         {
             Vector2 start = this.mapMethod(joints[startJoint].Position);

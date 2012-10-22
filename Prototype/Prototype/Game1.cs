@@ -46,13 +46,10 @@ namespace Prototype
         float updateTime;
         int hitTimer;
         bool nexthit;
+
         SoundEffect soundEffect;
         SoundEffect wrongHitSound;
         SoundEffect gameOverSound;
-
-        
-
-        //int[] testarray={0,1,2,3,4,5};
 
         Vector2 LHandPos;
         Vector2 RHandPos;
@@ -66,10 +63,10 @@ namespace Prototype
         int[] beatSequence;
 
         SoundEffect[] sounds;
-
-
-
         Random random = new Random();
+
+        float textshow = 0;
+
 
 
 
@@ -266,9 +263,12 @@ namespace Prototype
 
             Vector2 imgPosition = new Vector2(imageXPos, imageYPos);
             card.Initialize(Content.Load<Texture2D>("hitCircleHit"), imgPosition);
+            card.Initialize(Content.Load<Texture2D>("hitBoxHit"),imgPosition);
             scoreFont = Content.Load<SpriteFont>("SpriteFont1");
 
             sounds = new SoundEffect[6];
+
+            
 
             sounds[0] = Content.Load<SoundEffect>("hitRedSound");
             sounds[1] = Content.Load<SoundEffect>("hitGreenSound");
@@ -276,7 +276,6 @@ namespace Prototype
             sounds[3] = Content.Load<SoundEffect>("hitBlueSound");
             sounds[4] = Content.Load<SoundEffect>("hitPurpleSound");
             sounds[5] = Content.Load<SoundEffect>("hitOrangeSound");
-
 
             wrongHitSound =  Content.Load<SoundEffect>("wronghit");
             gameOverSound =  Content.Load<SoundEffect>("Gameover");
@@ -321,19 +320,19 @@ namespace Prototype
             //trying to make the game wait for some time before next level starts           
             if ((gameTime.TotalGameTime.Seconds - newLevelTimer) > 2 && !newLevel)
             {
+                spriteBatch.Begin();
+                spriteBatch.DrawString(scoreFont, "Watch!", new Vector2(150, 50), Microsoft.Xna.Framework.Color.Brown);
+                
+
                 newLevel = true;
                 roundTime = gameTime.TotalGameTime.Seconds;
                 card.Show = true;
+                spriteBatch.End();
             }
             else if (!newLevel)
             {
                 card.Show = false;
             }
-
-            
-            
-            // TODO: Add your update logic here
-
 
                 LHandPos = this.depthStream.skeletonStream.jointPosLHand;
                 RHandPos = this.depthStream.skeletonStream.jointPosRHand;
@@ -345,20 +344,6 @@ namespace Prototype
                 {
                     hitBox[i].Update(i);
                 }
-
-
-                if (playing)
-                {
-                    Console.WriteLine("Hit: " + hits);
-                    Console.WriteLine("score: " + score);
-                    Console.WriteLine("Left hand: " + LHandPos + " Rigth Hand: " + RHandPos);
-                    // Console.WriteLine("Rigth Hand: " + RHandPos);
-                }
-
-                /* if (LHandPos.X < 100 && LHandPos.Y < 100 || RHandPos.X < 100 && RHandPos.Y < 100)
-                 {
-                     playing = false;
-                 }*/
 
                 int imageXPos;
                 int imageYPos;
@@ -373,11 +358,14 @@ namespace Prototype
                 //draw shapes again if player have not finish in 15 sec
                 if (newLevel && (gameTime.TotalGameTime.Seconds - roundTime) > (10 + lvl))
                 {
+                    spriteBatch.Begin();
+                    spriteBatch.DrawString(scoreFont, "Watch!", new Vector2(150, 50), Microsoft.Xna.Framework.Color.Brown);
                     card.Show = true;
                     drawTime = 0;
                     score = score-2;
                     hits = 0;
                     roundTime = gameTime.TotalGameTime.Seconds;
+                    spriteBatch.End();
                 }
 
                 if (newLevel && playing)
@@ -430,19 +418,7 @@ namespace Prototype
                                 hits++;
                                 nexthit = false;
 
-
-                                //draw a circle to indicate hit
-                                card.Update(hits);
-                                card.Show = true;
-                                spriteBatch.Begin();
-                                card.Draw(spriteBatch);
-                                spriteBatch.End();
-                                corectHit = true;
-                                hitTimer = gameTime.TotalGameTime.Seconds;
-                                //card.Show = false;
-
-                               // sounds[beatSequence[hits]].Play();
-
+                                
                             }
                         }
                         else
@@ -450,8 +426,7 @@ namespace Prototype
 
                             imageXPos = 500; //Kinect sucks balls, thats why
                             imageYPos = ((beatSequence[hits] / 2) * 200); 
-                            
-                            // Console.WriteLine("Right: Top: " + imageXPos + "," + imageYPos + " Bot: " + (imageXPos + 100) + "," + (imageYPos + 100));
+                           
 
 
 
@@ -523,7 +498,10 @@ namespace Prototype
 
                                 }
                                 if (wrongHit > 2)
-                                {
+                                    spriteBatch.Begin();
+                                    spriteBatch.DrawString(scoreFont, "Game Over" + score, 
+                                    new Vector2(150, 200), Microsoft.Xna.Framework.Color.Red);
+                             //       System.Threading.Thread.Sleep(000);
                                     lvl = 0;
                                     playing = false;
                                     card.Show = true;
@@ -536,10 +514,8 @@ namespace Prototype
                                     score = 0;
                                     hitTimer = gameTime.TotalGameTime.Seconds;
                                     gameOverSound.Play();
-                                    
-
+                                    spriteBatch.End();
                                 }
-
 
                              }
                         }
@@ -554,19 +530,22 @@ namespace Prototype
                     }
 
                     //new level starts
-                    if (beatSequence.Length == hits)
-                    {
-                        lvl++;
-                        playing = false;
-                        card.Show = true;
-                        hits = 0;
-                        drawTime = 0;
-                        roundTime = gameTime.TotalGameTime.Seconds;
-                        newLevel = false; //yes its backwards, just dael with it 
-                        newLevelTimer = gameTime.TotalGameTime.Seconds;
-                        wrongHit = 0;
-
-                    }
+                if (beatSequence.Length == hits)
+                {
+                   spriteBatch.Begin();
+                   spriteBatch.DrawString(scoreFont, "Game Over" + score, 
+                   new Vector2(150, 200), Microsoft.Xna.Framework.Color.Red);
+                   lvl++;
+                   playing = false;
+                   card.Show = true;
+                   hits = 0;
+                   drawTime = 0;
+                   roundTime = gameTime.TotalGameTime.Seconds;
+                   newLevel = false; //yes its backwards, just dael with it 
+                   newLevelTimer = gameTime.TotalGameTime.Seconds;
+                   wrongHit = 0;
+                   spriteBatch.End();
+                    
 
                 }
 
@@ -634,8 +613,12 @@ namespace Prototype
 
 
             card.Draw(spriteBatch);
-            spriteBatch.DrawString(scoreFont, "score: " + score, new  Vector2 (150,10), Microsoft.Xna.Framework.Color.HotPink);
-            spriteBatch.DrawString(scoreFont, "Level: " + (lvl+1), new Vector2(150, 30), Microsoft.Xna.Framework.Color.HotPink);
+            spriteBatch.DrawString(scoreFont, "score: " + score, new Vector2(151, 11), Microsoft.Xna.Framework.Color.Black);
+            spriteBatch.DrawString(scoreFont, "Level: " + (lvl + 1), new Vector2(151, 31), Microsoft.Xna.Framework.Color.Black);
+            spriteBatch.DrawString(scoreFont, "score: " + score, new  Vector2 (150,10), Microsoft.Xna.Framework.Color.White);
+            spriteBatch.DrawString(scoreFont, "Level: " + (lvl+1), new Vector2(150, 30), Microsoft.Xna.Framework.Color.White);            spriteBatch.DrawString(scoreFont, "score: " + score, new  Vector2 (150,10), Microsoft.Xna.Framework.Color.White);
+  
+
 
 
             

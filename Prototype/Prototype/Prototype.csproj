@@ -134,6 +134,7 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="hitBoxHit.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PrototypeContent\PrototypeContent.contentproj">

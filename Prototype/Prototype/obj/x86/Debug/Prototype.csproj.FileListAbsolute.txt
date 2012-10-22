@@ -52,3 +52,6 @@ C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\C
 C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitRedSound.xnb
 C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitYellowSound.xnb
 C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBlueSound.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\hitBoxHit.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\play.xnb
+C:\Users\sirslask\Documents\GitHub\Prototype\Prototype\Prototype\bin\x86\Debug\Content\watch.xnb
