@@ -239,7 +239,32 @@ namespace Prototype
         protected void RandomSequence(int beats)
         {
 
-            
+            /*
+			
+			int[] TempBeatSequence = new int[beats-1]
+			
+			for (int i = 0; i < (beats-1); i++)
+            {
+				TempBeatSequence[i] = beatSequence[i]; 
+			}
+			
+			beatSequence = new int[beats];
+			
+			for (int i = 0; i < (beats-1); i++)
+            {
+				 beatSequence[i] = TempBeatSequence[i]; 
+			}
+			
+			if(i>0)
+				{
+			        while (beatSequence[beats] == beatSequence[beats - 1])
+                    {
+                        beatSequence[beats] = random.Next(6);
+                    }
+				}
+			
+			*/
+			
             beatSequence = new int[beats];
             for (int i = 0; i < beats; i++)
             {
