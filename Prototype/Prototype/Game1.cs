@@ -188,8 +188,11 @@ namespace Prototype
         /// </summary>
         protected override void Initialize()
         {
+            gameOver = false;
             corectHit = false;
             newLevel = false;
+            play = false;
+            watching = true;
             roundTime = 0;
             drawTime = 0;
             updateTime = 0;
@@ -330,7 +333,9 @@ namespace Prototype
             //trying to make the game wait for some time before next level starts           
             if ((gameTime.TotalGameTime.Seconds - newLevelTimer) > 2 && !newLevel)
             {
-                watching = false;
+                gameOver = false;
+                play = false;
+                watching = true;
                 spriteBatch.Begin();
                 newLevel = true;
                 roundTime = gameTime.TotalGameTime.Seconds;
@@ -387,6 +392,7 @@ namespace Prototype
 
                     if (drawTime < beatSequence.Length)
                     {
+                        play = false;
                         card.Update(beatSequence[drawTime]);
                         drawTime = (gameTime.TotalGameTime.Seconds - roundTime);
                         updateTime = 0;
@@ -399,7 +405,8 @@ namespace Prototype
 
                     if (!card.Show && playing)
                     {
-
+                        play = true;
+                        watching = false;
 
                         imageXPos = 0;
                         imageYPos = ((beatSequence[hits] / 2) * 250);
@@ -494,7 +501,7 @@ namespace Prototype
                                 }
                                 if (wrongHit > 2)
                                 {
-                                    gameOver = false;
+                                    gameOver = true;
                                     gameOverSound.Play();
                                     spriteBatch.Begin();
                                     spriteBatch.DrawString(scoreFont, "Game Over", new Vector2(150, 200), Microsoft.Xna.Framework.Color.Red);
@@ -502,6 +509,8 @@ namespace Prototype
                                     lvl = 0;
                                     playing = false;
                                     card.Show = true;
+                                    play = false;
+                                    watching = false;
                                     hits = 0;
                                     drawTime = 0;
                                     roundTime = gameTime.TotalGameTime.Seconds;
@@ -532,6 +541,7 @@ namespace Prototype
                     {
                         gameOver = false;
                         watching = true;
+                        play = false;
                         lvl++;
                         playing = false;
                         card.Show = true;
@@ -545,6 +555,10 @@ namespace Prototype
 
                 }
 
+                if (gameOver == true)
+                {
+                    watching = false;
+                }
 
                 // Animate the transition value
                 if (this.colorHasFocus)
@@ -573,6 +587,8 @@ namespace Prototype
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        /// 
+
         protected override void Draw(GameTime gameTime)
         {
             //GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
@@ -608,13 +624,18 @@ namespace Prototype
 
 
             card.Draw(spriteBatch);
+            if (gameOver) spriteBatch.DrawString(scoreFont, "Game Over", new Vector2(151, 200), Microsoft.Xna.Framework.Color.White);
             if (gameOver) spriteBatch.DrawString(scoreFont, "Game Over", new Vector2(150, 200), Microsoft.Xna.Framework.Color.Red);
-            if (watching) spriteBatch.Draw(watchtext, new Vector2(150, 50), Microsoft.Xna.Framework.Color.White);
-            if (play) spriteBatch.Draw(playtext, new Vector2(150, 50), Microsoft.Xna.Framework.Color.White);
+            if (watching) spriteBatch.Draw(watchtext, new Vector2(125, 100), Microsoft.Xna.Framework.Color.White);
+            if (play) spriteBatch.Draw(playtext, new Vector2(130, 100), Microsoft.Xna.Framework.Color.White);
             spriteBatch.DrawString(scoreFont, "score: " + score, new Vector2(151, 11), Microsoft.Xna.Framework.Color.Black);
             spriteBatch.DrawString(scoreFont, "Level: " + (lvl + 1), new Vector2(151, 31), Microsoft.Xna.Framework.Color.Black);
             spriteBatch.DrawString(scoreFont, "score: " + score, new  Vector2 (150,10), Microsoft.Xna.Framework.Color.White);
             spriteBatch.DrawString(scoreFont, "Level: " + (lvl+1), new Vector2(150, 30), Microsoft.Xna.Framework.Color.White);
+            spriteBatch.DrawString(scoreFont, "Lenght:" + (hits), new Vector2(151, 50), Microsoft.Xna.Framework.Color.Black);
+            spriteBatch.DrawString(scoreFont, "Lenght:" + (hits) , new Vector2(150, 50), Microsoft.Xna.Framework.Color.White);
+            
+
             // Stop drawing
             spriteBatch.End();
         }
