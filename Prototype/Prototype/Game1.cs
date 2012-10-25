@@ -46,6 +46,9 @@ namespace Prototype
         float updateTime;
         int hitTimer;
         bool nexthit;
+        bool watching;
+        bool gameOver;
+        bool play;
 
         SoundEffect soundEffect;
         SoundEffect wrongHitSound;
@@ -56,9 +59,14 @@ namespace Prototype
         Vector2 LFootPos;
         Vector2 RFootPos;
 
+        private Texture2D playtext;
+        private Texture2D watchtext;
+
+
         Cards card;  //Iimage for cards
         Cards[] hitBox;
         SpriteFont scoreFont;
+
 
         int[] beatSequence;
 
@@ -244,6 +252,7 @@ namespace Prototype
             }
         }
 
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -268,8 +277,6 @@ namespace Prototype
 
             sounds = new SoundEffect[6];
 
-            
-
             sounds[0] = Content.Load<SoundEffect>("hitRedSound");
             sounds[1] = Content.Load<SoundEffect>("hitGreenSound");
             sounds[2] = Content.Load<SoundEffect>("hitYellowSound");
@@ -279,7 +286,10 @@ namespace Prototype
 
             wrongHitSound =  Content.Load<SoundEffect>("wronghit");
             gameOverSound =  Content.Load<SoundEffect>("Gameover");
-      
+
+            playtext = Content.Load<Texture2D>("play");
+            watchtext = Content.Load<Texture2D>("watch");
+
 
             for (int i = 0; i < 6; i++)
             {
@@ -320,10 +330,8 @@ namespace Prototype
             //trying to make the game wait for some time before next level starts           
             if ((gameTime.TotalGameTime.Seconds - newLevelTimer) > 2 && !newLevel)
             {
+                watching = false;
                 spriteBatch.Begin();
-                spriteBatch.DrawString(scoreFont, "Watch!", new Vector2(150, 50), Microsoft.Xna.Framework.Color.Brown);
-                
-
                 newLevel = true;
                 roundTime = gameTime.TotalGameTime.Seconds;
                 card.Show = true;
@@ -351,21 +359,19 @@ namespace Prototype
                 if (!playing)
                 {
                     RandomSequence(2 + lvl);
-
+                    watching = true;
                     playing = true;
                 }
 
                 //draw shapes again if player have not finish in 15 sec
                 if (newLevel && (gameTime.TotalGameTime.Seconds - roundTime) > (10 + lvl))
                 {
-                    spriteBatch.Begin();
-                    spriteBatch.DrawString(scoreFont, "Watch!", new Vector2(150, 50), Microsoft.Xna.Framework.Color.Brown);
+                    watching = true;
                     card.Show = true;
                     drawTime = 0;
                     score = score-2;
                     hits = 0;
                     roundTime = gameTime.TotalGameTime.Seconds;
-                    spriteBatch.End();
                 }
 
                 if (newLevel && playing)
@@ -441,17 +447,6 @@ namespace Prototype
                                 hits++;
                                 nexthit = false;
 
-                                //draw a circle to indicate hit
-                                card.Update(hits);
-                                card.Show = true;
-                                spriteBatch.Begin();
-                                card.Draw(spriteBatch);
-                                spriteBatch.End();
-                                corectHit = true;
-                                hitTimer = gameTime.TotalGameTime.Seconds;
-                                
-
-                                // card.Show = false;
                             }
                         }
 
@@ -498,10 +493,12 @@ namespace Prototype
 
                                 }
                                 if (wrongHit > 2)
+                                {
+                                    gameOver = false;
+                                    gameOverSound.Play();
                                     spriteBatch.Begin();
-                                    spriteBatch.DrawString(scoreFont, "Game Over" + score, 
-                                    new Vector2(150, 200), Microsoft.Xna.Framework.Color.Red);
-                             //       System.Threading.Thread.Sleep(000);
+                                    spriteBatch.DrawString(scoreFont, "Game Over", new Vector2(150, 200), Microsoft.Xna.Framework.Color.Red);
+                                    spriteBatch.End();
                                     lvl = 0;
                                     playing = false;
                                     card.Show = true;
@@ -513,9 +510,10 @@ namespace Prototype
                                     wrongHit = 0;
                                     score = 0;
                                     hitTimer = gameTime.TotalGameTime.Seconds;
-                                    gameOverSound.Play();
-                                    spriteBatch.End();
+                                    
+                                    
                                 }
+
 
                              }
                         }
@@ -530,22 +528,20 @@ namespace Prototype
                     }
 
                     //new level starts
-                if (beatSequence.Length == hits)
-                {
-                   spriteBatch.Begin();
-                   spriteBatch.DrawString(scoreFont, "Game Over" + score, 
-                   new Vector2(150, 200), Microsoft.Xna.Framework.Color.Red);
-                   lvl++;
-                   playing = false;
-                   card.Show = true;
-                   hits = 0;
-                   drawTime = 0;
-                   roundTime = gameTime.TotalGameTime.Seconds;
-                   newLevel = false; //yes its backwards, just dael with it 
-                   newLevelTimer = gameTime.TotalGameTime.Seconds;
-                   wrongHit = 0;
-                   spriteBatch.End();
-                    
+                    if (beatSequence.Length == hits)
+                    {
+                        gameOver = false;
+                        watching = true;
+                        lvl++;
+                        playing = false;
+                        card.Show = true;
+                        hits = 0;
+                        drawTime = 0;
+                        roundTime = gameTime.TotalGameTime.Seconds;
+                        newLevel = false; //yes its backwards, just dael with it 
+                        newLevelTimer = gameTime.TotalGameTime.Seconds;
+                        wrongHit = 0;
+                    }
 
                 }
 
@@ -571,7 +567,6 @@ namespace Prototype
             
             base.Update(gameTime);
         }
-
 
 
         /// <summary>
@@ -613,19 +608,16 @@ namespace Prototype
 
 
             card.Draw(spriteBatch);
+            if (gameOver) spriteBatch.DrawString(scoreFont, "Game Over", new Vector2(150, 200), Microsoft.Xna.Framework.Color.Red);
+            if (watching) spriteBatch.Draw(watchtext, new Vector2(150, 50), Microsoft.Xna.Framework.Color.White);
+            if (play) spriteBatch.Draw(playtext, new Vector2(150, 50), Microsoft.Xna.Framework.Color.White);
             spriteBatch.DrawString(scoreFont, "score: " + score, new Vector2(151, 11), Microsoft.Xna.Framework.Color.Black);
             spriteBatch.DrawString(scoreFont, "Level: " + (lvl + 1), new Vector2(151, 31), Microsoft.Xna.Framework.Color.Black);
             spriteBatch.DrawString(scoreFont, "score: " + score, new  Vector2 (150,10), Microsoft.Xna.Framework.Color.White);
-            spriteBatch.DrawString(scoreFont, "Level: " + (lvl+1), new Vector2(150, 30), Microsoft.Xna.Framework.Color.White);            spriteBatch.DrawString(scoreFont, "score: " + score, new  Vector2 (150,10), Microsoft.Xna.Framework.Color.White);
-  
-
-
-
-            
+            spriteBatch.DrawString(scoreFont, "Level: " + (lvl+1), new Vector2(150, 30), Microsoft.Xna.Framework.Color.White);
             // Stop drawing
             spriteBatch.End();
         }
-
         /// <summary>
         /// This method ensures that we can render to the back buffer without
         /// losing the data we already had in our previous back buffer.  This
